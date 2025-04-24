@@ -1,5 +1,6 @@
 "use client";
 
+import CoachCard from "@/components/CoachCard";
 import { useState } from "react";
 
 export default function TrouverCoach() {
@@ -58,16 +59,12 @@ export default function TrouverCoach() {
               item.email.toLowerCase().includes(search.toLowerCase())
           )
           .map((item) => (
-            <li key={item.id} className="bg-white p-4 rounded shadow">
-              <h3 className="text-xl font-semibold text-gray-800">
-                {item.nom}
-              </h3>
-              <p className="text-gray-600">{item.bio}</p>
-              <p className="text-sm text-gray-500 italic">{item.email}</p>
-              <button className="mt-3 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-                Contacter
-              </button>
-            </li>
+            <CoachCard
+              key={item.id}
+              nom={item.nom}
+              bio={item.bio}
+              email={item.email}
+            />
           ))}
       </ul>
     </div>
