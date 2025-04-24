@@ -14,23 +14,80 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🚀 Sprint 0 — Astro Training App (Front-end)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📚 Objectif
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Mettre en place les fondations du projet front-end avec Next.js (App Router), React et Tailwind CSS v3.  
+Ce Sprint comprend l'installation, la mise en page initiale et les premières fonctionnalités dynamiques.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ✅ Tâches réalisées
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🎨 Mise en place technique
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [x] Création du projet Next.js avec App Router – `2 pts`
+- [x] Configuration de Tailwind CSS avec thème sombre (`@apply`) – `2 pts`
+- [x] Création du layout global (`Navbar`, `Footer`) – `7 pts`
+- [x] Page d’accueil responsive – `3 pts`
 
-## Deploy on Vercel
+### 🔍 Fonctionnalités page `trouver-coach`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [x] Création de la page `app/trouver-coach/page.jsx` – `2 pts`
+- [x] Champ de recherche contrôlé avec `useState` – `2 pts`
+- [x] Filtrage dynamique des coachs avec `.filter()` – `3 pts`
+- [x] Création du composant `CoachCard.jsx` – `3 pts`
+- [x] Design amélioré des cartes (icône, couleurs, hover, responsive) – `5 pts`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🧮 Total des points validés
+
+**🟢 29 / 29 points – Sprint 0 terminé à 100%**
+
+---
+
+## 🧱 Back-end (Sprint 1 à venir)
+
+Le back-end sera lancé dans le prochain Sprint avec :
+
+- Base de données `astro_training`
+- Tables : `users`, `clients`, `mensurations`
+- API test de récupération des coachs (`GET`)
+
+# 🚀 Sprint 1 — Astro Training App (Back-end + Intégration API)
+
+## 📚 Objectif
+
+Commencer le développement du back-end avec MySQL.  
+Créer une base de données pour gérer les coachs, les clients et leurs mensurations.  
+Mettre en place les premières API pour connecter le front aux données réelles.
+
+---
+
+## 🔧 Tâches Sprint 1
+
+| Tâche                                                     | Points | Statut     |
+| --------------------------------------------------------- | ------ | ---------- |
+| 🗃️ Création de la base MySQL `astro_training`             | 3 pts  | 🔲 À faire |
+| 📐 Création des tables `users`, `clients`, `mensurations` | 4 pts  | 🔲 À faire |
+| 👤 Insertion d’un coach fictif (admin) pour test          | 2 pts  | 🔲 À faire |
+| 🔌 Connexion test avec TablePlus ou MySQL Shell           | 2 pts  | 🔲 À faire |
+| 🌐 Création d’une API route `GET /api/coachs`             | 3 pts  | 🔲 À faire |
+| 🧪 Test de l’API en front dans `trouver-coach/page.jsx`   | 3 pts  | 🔲 À faire |
+
+---
+
+## 🧮 Total prévu Sprint 1
+
+**🔵 17 points à valider**
+
+---
+
+## 📝 À mettre dans Notion (Sprint 1 – Colonne “🟡 En cours”) :
+
+- ✅ Créer un ticket par **tâche ci-dessus**
+- 📌 Ajouter les points dans la propriété “Story Points”
+- 🎯 Utiliser les étiquettes “Back-end”, “API”, “BDD” pour mieux les trier
+- ⏳ Déplacer la première tâche (“Créer base astro_training”) en **En cours**
