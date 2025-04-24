@@ -29,6 +29,9 @@ export default function RootLayout({ children }) {
             >
               Trouver un coach
             </Link>
+            <Link href="/login" className="text-blue-600 hover:underline">
+              Se logger
+            </Link>
           </div>
         </nav>
 

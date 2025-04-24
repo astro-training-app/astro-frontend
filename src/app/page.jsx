@@ -29,6 +29,9 @@ export default function Home() {
         <Button color="green" onClick={() => router.push("/trouver-coach")}>
           Trouver un coach
         </Button>
+        <Button color="green" onClick={() => router.push("/login")}>
+          S'identifier
+        </Button>
       </div>
 
       <Image
