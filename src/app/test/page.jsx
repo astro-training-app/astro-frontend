@@ -1,15 +1,10 @@
-// src/app/test/page.jsx
-"use client";
+// app/test/page.jsx
+import TestFetch from "@/components/TestFetch";
 
-import { useRouter } from "next/navigation";
-
-export default function Test() {
-  const router = useRouter();
-
+export default function Page() {
   return (
-    <div className="p-8">
-      <h1>Test Navigation</h1>
-      <button onClick={() => router.push("/")}>Retour accueil</button>
-    </div>
+    <main className="min-h-screen flex items-center justify-center">
+      <TestFetch />
+    </main>
   );
 }
