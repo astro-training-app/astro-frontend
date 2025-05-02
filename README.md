@@ -1,25 +1,15 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🦾 FitCoach – Astro Training App
 
-## Getting Started
+Ce projet est une application de coaching sportif permettant aux coachs de suivre leurs clients et aux clients de consulter leur évolution physique. Le projet est développé avec Next.js (App Router), React 19 et Tailwind CSS v4.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
 # 🚀 Sprint 0 — Astro Training App (Front-end)
 
 ## 📚 Objectif
 
-Mettre en place les fondations du projet front-end avec Next.js (App Router), React et Tailwind CSS v3.  
-Ce Sprint comprend l'installation, la mise en page initiale et les premières fonctionnalités dynamiques.
+Mettre en place les fondations du projet front-end avec Next.js (App Router), React et Tailwind CSS.  
+Ce sprint comprend l’installation, la mise en page initiale et les premières fonctionnalités visuelles dynamiques.
 
 ---
 
@@ -28,9 +18,9 @@ Ce Sprint comprend l'installation, la mise en page initiale et les premières fo
 ### 🎨 Mise en place technique
 
 - [x] Création du projet Next.js avec App Router – `2 pts`
-- [x] Configuration de Tailwind CSS avec thème sombre (`@apply`) – `2 pts`
-- [x] Création du layout global (`Navbar`, `Footer`) – `7 pts`
-- [x] Page d’accueil responsive – `3 pts`
+- [x] Configuration de Tailwind CSS avec thème sombre (via `@apply` et variables CSS) – `2 pts`
+- [x] Création du layout global avec `Navbar` (toggle clair/sombre) et `Footer` – `7 pts`
+- [x] Page d’accueil responsive avec boutons dynamiques – `3 pts`
 
 ### 🔍 Fonctionnalités page `trouver-coach`
 
@@ -42,31 +32,31 @@ Ce Sprint comprend l'installation, la mise en page initiale et les premières fo
 
 ---
 
+## 🌙 Système clair/sombre
+
+Un bouton dans la `Navbar.jsx` permet de basculer manuellement entre le thème clair et sombre.  
+Les couleurs sont définies via des variables CSS (`--background`, `--foreground`) dans `globals.css`.  
+Tailwind CSS est configuré pour appliquer automatiquement ces variables via les classes `bg-background` et `text-foreground`.
+
+---
+
 ## 🧮 Total des points validés
 
 **🟢 29 / 29 points – Sprint 0 terminé à 100%**
 
 ---
 
-## 🧱 Back-end (Sprint 1 à venir)
+# 🧱 Back-end à venir (Sprint 1)
 
 Le back-end sera lancé dans le prochain Sprint avec :
 
-- Base de données `astro_training`
-- Tables : `users`, `clients`, `mensurations`
-- API test de récupération des coachs (`GET`)
-
-# 🚀 Sprint 1 — Astro Training App (Back-end + Intégration API)
-
-## 📚 Objectif
-
-Commencer le développement du back-end avec MySQL.  
-Créer une base de données pour gérer les coachs, les clients et leurs mensurations.  
-Mettre en place les premières API pour connecter le front aux données réelles.
+- Une base de données `astro_training`
+- Trois tables principales : `users`, `clients`, `mensurations`
+- Une API route test de récupération des coachs (`GET /api/coachs`)
 
 ---
 
-## 🔧 Tâches Sprint 1
+# 🧪 Tâches Sprint 1 à créer dans Linear
 
 | Tâche                                                     | Points | Statut     |
 | --------------------------------------------------------- | ------ | ---------- |
@@ -77,17 +67,11 @@ Mettre en place les premières API pour connecter le front aux données réelles
 | 🌐 Création d’une API route `GET /api/coachs`             | 3 pts  | 🔲 À faire |
 | 🧪 Test de l’API en front dans `trouver-coach/page.jsx`   | 3 pts  | 🔲 À faire |
 
----
-
-## 🧮 Total prévu Sprint 1
-
-**🔵 17 points à valider**
+**🔵 Total prévu Sprint 1 : 17 points à valider**
 
 ---
 
-## 📝 À mettre dans Notion (Sprint 1 – Colonne “🟡 En cours”) :
+## 👨‍💻 Réalisé par
 
-- ✅ Créer un ticket par **tâche ci-dessus**
-- 📌 Ajouter les points dans la propriété “Story Points”
-- 🎯 Utiliser les étiquettes “Back-end”, “API”, “BDD” pour mieux les trier
-- ⏳ Déplacer la première tâche (“Créer base astro_training”) en **En cours**
+- **Koka** – Front-end principal & chef de projet
+- **Arthur** – Back-end (Sprint 1 à venir)
