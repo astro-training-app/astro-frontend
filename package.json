@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "lucide-react": "^0.503.0",
     "next": "15.3.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -20,5 +23,10 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
     "tailwindcss": "^4"
-  }
+  },
+  "description": "Ce projet est une application de coaching sportif permettant aux coachs de suivre leurs clients et aux clients de consulter leur évolution physique. Le projet est développé avec Next.js (App Router), React 19 et Tailwind CSS v4.",
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
