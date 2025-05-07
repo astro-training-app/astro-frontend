@@ -9,8 +9,6 @@ export default function Login() {
   const [loggued, setLogged] = useState(false);
   const [message, setMessage] = useState("");
 
-  const cookieTimer = new Date(new Date().getTime() + 60 * 60 * 1000);
-
   const verification = async (e) => {
     e.preventDefault();
 
@@ -28,9 +26,9 @@ export default function Login() {
     });
     console.log(res);
     const data = await res.json();
+    const cookieTimer = new Date(data.expireAt);
     setMessage(data.message);
     console.log(data);
-    console.log(data.token);
     if (res.ok) {
       setLogged(true);
       Cookies.set("token", data.token, { expires: cookieTimer });
