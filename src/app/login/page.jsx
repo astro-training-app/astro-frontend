@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Cookies from "js-cookie";
 const url = "http://localhost:3000/api";
 
 export default function Login() {
@@ -7,6 +8,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loggued, setLogged] = useState(false);
   const [message, setMessage] = useState("");
+
+  const cookieTimer = new Date(new Date().getTime() + 60 * 60 * 1000);
 
   const verification = async (e) => {
     e.preventDefault();
@@ -27,8 +30,10 @@ export default function Login() {
     const data = await res.json();
     setMessage(data.message);
     console.log(data);
+    console.log(data.token);
     if (res.ok) {
       setLogged(true);
+      Cookies.set("token", data.token, { expires: cookieTimer });
     } else {
       setLogged(false);
     }
