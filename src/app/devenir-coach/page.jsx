@@ -43,9 +43,9 @@ export default function DevenirCoach() {
       body,
     });
     console.log(res);
+    const data = await res.json();
+    setMessage(data.message);
     if (res.ok) {
-      const data = await res.json();
-      setMessage(data.status);
     }
   };
 

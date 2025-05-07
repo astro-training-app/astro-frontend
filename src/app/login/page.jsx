@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+const url = "http://localhost:3000/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -7,24 +8,29 @@ export default function Login() {
   const [loggued, setLogged] = useState(false);
   const [message, setMessage] = useState("");
 
-  const LogClients = [
-    { email: "abc@abc.com", password: "abc" },
-    { email: "123@123.com", password: "123" },
-  ];
-
-  const verification = (e) => {
+  const verification = async (e) => {
     e.preventDefault();
 
-    const isValid = LogClients.some(
-      (e) => e.email === email && e.password === password
-    );
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    const body = JSON.stringify({
+      email,
+      password,
+    });
 
-    if (isValid) {
+    const res = await fetch(url + "/auth/login", {
+      method: "POST",
+      headers,
+      body,
+    });
+    console.log(res);
+    const data = await res.json();
+    setMessage(data.message);
+    console.log(data);
+    if (res.ok) {
       setLogged(true);
-      setMessage("Bienvenue à vous !");
     } else {
       setLogged(false);
-      setMessage("L'email ou le mot de passe sont incorrect !");
     }
   };
 
