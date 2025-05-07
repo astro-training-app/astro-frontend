@@ -6,6 +6,8 @@
 
 import { useState } from "react";
 
+const url = "http://localhost:3000/api";
+
 export default function DevenirCoach() {
   {
     /* les useState */
@@ -14,17 +16,37 @@ export default function DevenirCoach() {
   const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   {
     /* fonction pou rle formulaire */
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log("Nom :", nom);
     console.log("Email :", email);
     console.log("Mot de passe :", password);
+
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    const body = JSON.stringify({
+      nom,
+      email,
+      password,
+    });
+
+    const res = await fetch(url + "/auth/register", {
+      method: "POST",
+      headers,
+      body,
+    });
+    console.log(res);
+    if (res.ok) {
+      const data = await res.json();
+      setMessage(data.status);
+    }
   };
 
   return (
@@ -89,6 +111,7 @@ export default function DevenirCoach() {
           Créer un compte coach
         </button>
       </form>
+      <p>{message}</p>
     </div>
   );
 }
