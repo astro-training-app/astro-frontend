@@ -3,8 +3,9 @@
 {
   /* route pour la page coach */
 }
-
+import useProtectedRoute from "../hooks/useProtectedRoute";
 import { useState } from "react";
+import useProtectedRoute from "../hooks/useProtectedRoute";
 
 const url = "http://localhost:3000/api";
 
@@ -12,6 +13,9 @@ export default function DevenirCoach() {
   {
     /* les useState */
   }
+
+  const checking = useProtectedRoute();
+  if (checking) return null;
 
   const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
