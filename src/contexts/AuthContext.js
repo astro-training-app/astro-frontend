@@ -1,28 +1,29 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    const token = Cookies.get("token"); // le vrai token est déjà là
-    setIsAuthenticated(!!token); // on check juste s’il existe
+    const token = Cookies.get("token");
+    setIsAuthenticated(!!token);
   }, []);
 
-  const login = () => {
-    // facultatif, tu peux le virer si login() est déjà géré dans /login
-  };
-
   const logout = () => {
-    Cookies.remove("token", { path: "/" });
+    Cookies.remove("token");
     setIsAuthenticated(false);
+    router.push("/"); // j'ai rajouter ici le chemin en cas de deconnection //
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, setIsAuthenticated, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

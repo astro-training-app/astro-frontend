@@ -3,10 +3,10 @@
 {
   /* route pour la page coach */
 }
-import useProtectedRoute from "../hooks/useProtectedRoute";
+import useProtectedRoute from "../../hooks/useProtectedRoute";
 import { useState } from "react";
 
-const url = "http://localhost:5000/api";
+const url = "http://localhost:3000/api";
 
 export default function DevenirCoach() {
   {

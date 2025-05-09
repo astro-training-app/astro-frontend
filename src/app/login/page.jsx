@@ -1,13 +1,16 @@
 "use client";
 import { useState } from "react";
 import Cookies from "js-cookie";
-const url = "http://localhost:5000/api";
+import { useAuth } from "@/contexts/AuthContext";
+
+const url = "http://localhost:3000/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggued, setLogged] = useState(false);
   const [message, setMessage] = useState("");
+  const { setIsAuthenticated } = useAuth();
 
   const verification = async (e) => {
     e.preventDefault();
@@ -32,6 +35,7 @@ export default function Login() {
     if (res.ok) {
       setLogged(true);
       Cookies.set("token", data.token, { expires: cookieTimer });
+      setIsAuthenticated(true); // dis au contexte qu'on est connecté
     } else {
       setLogged(false);
     }

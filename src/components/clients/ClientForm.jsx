@@ -26,7 +26,7 @@ export default function ClientForm() {
 
     try {
       const token = Cookies.get("token"); // Récupération du token stocké
-      const response = await fetch("http://localhost:5000/api/clients", {
+      const response = await fetch("http://localhost:3000/api/clients", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
