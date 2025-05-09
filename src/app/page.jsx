@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Button from "@/components/Button";
+import { useAuth } from "@/contexts/AuthContext"; // petit test //
 
 export default function Home() {
   const router = useRouter();
+  const { isAuthenticated } = useAuth(); // il faut bien le mettre dans un fonction sinon nope //
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-8 bg-background text-foreground">
@@ -41,6 +43,9 @@ export default function Home() {
         height={256}
         className="rounded shadow-lg"
       />
+      <p className="text-lg">
+        isAuthenticated : {isAuthenticated ? "✅ Connecté" : "❌ Déconnecté"}
+      </p>
     </main>
   );
 }

@@ -2,9 +2,13 @@
 
 import CoachCard from "@/components/CoachCard";
 import { useState } from "react";
+import useProtectedRoute from "@/hooks/useProtectedRoute"; // le chemin pour authentification //
 
 export default function TrouverCoach() {
   const [search, setSearch] = useState("");
+  const checking = useProtectedRoute();
+
+  if (checking) return <p className="text-white p-10">Chargement...</p>; // bon la cela doit pas se voir en fait //
 
   const coachs = [
     {
