@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import LogoutButton from "./logoutButton";
+import { useAuth } from "@/contexts/AuthContext";
 
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [theme, setTheme] = useState("light");
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     // Applique le thème au HTML
@@ -26,16 +28,20 @@ export default function Navbar() {
 
       {/* Liens */}
       <div className="flex gap-4 text-sm sm:text-base">
-        <Link href="/devenir-coach" className="hover:underline">
-          Devenir coach
-        </Link>
+        {!isAuthenticated && (
+          <Link href="/devenir-coach" className="hover:underline">
+            Devenir coach
+          </Link>
+        )}
         <Link href="/trouver-coach" className="hover:underline">
           Trouver coach
         </Link>
-        <Link href="/login" className="hover:underline">
-          S'identifier
-        </Link>
-        <LogoutButton />
+        {!isAuthenticated && (
+          <Link href="/login" className="hover:underline">
+            S'identifier
+          </Link>
+        )}
+        {isAuthenticated && <LogoutButton />}
         <button
           onClick={toggleTheme}
           className="ml-4 px-2 py-1 rounded border text-xs sm:text-sm"
