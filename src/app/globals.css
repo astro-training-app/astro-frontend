@@ -12,6 +12,12 @@
   --foreground: #ffffff;
 }
 
+@layer components {
+  .input-style {
+    @apply w-full px-3 py-2 bg-gray-700 rounded text-white;
+  }
+}
+
 /* Appliquer les couleurs à toute la page */
 html,
 body {

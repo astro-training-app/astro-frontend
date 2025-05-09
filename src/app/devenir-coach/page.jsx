@@ -5,9 +5,8 @@
 }
 import useProtectedRoute from "../hooks/useProtectedRoute";
 import { useState } from "react";
-import useProtectedRoute from "../hooks/useProtectedRoute";
 
-const url = "http://localhost:3000/api";
+const url = "http://localhost:5000/api";
 
 export default function DevenirCoach() {
   {

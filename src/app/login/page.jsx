@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Cookies from "js-cookie";
-const url = "http://localhost:3000/api";
+const url = "http://localhost:5000/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
