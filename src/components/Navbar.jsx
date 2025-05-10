@@ -28,6 +28,12 @@ export default function Navbar() {
 
       {/* Liens */}
       <div className="flex gap-4 text-sm sm:text-base">
+        {isAuthenticated && (
+          <Link href="/page-animation" className="hover:underline">
+            Page animée ✨
+          </Link>
+        )}
+
         {!isAuthenticated && (
           <Link href="/devenir-coach" className="hover:underline">
             Devenir coach
