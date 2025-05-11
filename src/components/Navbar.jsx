@@ -27,7 +27,13 @@ export default function Navbar() {
       </Link>
 
       {/* Liens */}
+
       <div className="flex gap-4 text-sm sm:text-base">
+        {isAuthenticated && (
+          <Link href="/ajouter-client" className="hover:underline">
+            Ajouter un client
+          </Link>
+        )}
         {!isAuthenticated && (
           <Link href="/devenir-coach" className="hover:underline">
             Devenir coach
