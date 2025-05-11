@@ -3,7 +3,6 @@
 import Link from "next/link";
 import LogoutButton from "./logoutButton";
 import { useAuth } from "@/contexts/AuthContext";
-
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
@@ -11,7 +10,6 @@ export default function Navbar() {
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    // Applique le thème au HTML
     document.documentElement.className = theme;
   }, [theme]);
 
@@ -36,8 +34,12 @@ export default function Navbar() {
             <Link href="/clients" className="hover:underline">
               Mes Clients
             </Link>
+            <Link href="/page-animation" className="hover:underline">
+              Page animée ✨
+            </Link>
           </>
         )}
+
         {!isAuthenticated && (
           <Link href="/devenir-coach" className="hover:underline">
             Devenir coach
