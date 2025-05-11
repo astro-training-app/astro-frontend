@@ -3,8 +3,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
-const url = "http://localhost:3000/api/mensurations"
-
+const url = "http://localhost:3000/api/mensurations";
 
 export default function FormulaireMensurations() {
   const [mensurations, setMensurations] = useState({
@@ -27,27 +26,38 @@ export default function FormulaireMensurations() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-        const token = Cookies.get("token");
+      const token = Cookies.get("token");
 
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(mensurations)
-        });
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(mensurations),
+      });
 
-        if (!response.ok) {
-            throw new Error("Failed to submit mensurations");
-        }
+      if (!response.ok) {
+        throw new Error("Failed to submit mensurations");
+      }
 
-        toast.success("Mensurations enregistrées avec succès !");
+      // Réinitialisation des valeurs de mensurations
+      setMensurations({
+        date_mesure: "",
+        poids: "",
+        taille: "",
+        tour_biceps: "",
+        tour_poitrine: "",
+        tour_taille: "",
+        tour_cuisse: "",
+      });
+
+      toast.success("Mensurations enregistrées avec succès !");
     } catch (error) {
-        toast.error("Erreur lors de l'enregistrement des mensurations");
-        console.error(error);
+      toast.error("Erreur lors de l'enregistrement des mensurations");
+      console.error(error);
     }
   };
 

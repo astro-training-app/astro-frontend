@@ -24,6 +24,23 @@ export default function ListeMensurations() {
     getData();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      const res = await fetch(`${url}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Erreur lors de la suppression");
+      }
+
+      // Mise à jour de l’état local sans la ligne supprimée
+      setMensuration((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Erreur suppression :", error);
+    }
+  };
+
   return (
     <div className="grid gap-6">
       {mensuration.map((item) => (
@@ -38,6 +55,13 @@ export default function ListeMensurations() {
           <p>🧍 Poitrine : {item.tour_poitrine} cm</p>
           <p>🧍‍♂️ Taille : {item.tour_taille} cm</p>
           <p>🦵 Cuisse : {item.tour_cuisse} cm</p>
+
+          <button
+            onClick={() => handleDelete(item.id)}
+            className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white"
+          >
+            🗑️ Supprimer
+          </button>
         </div>
       ))}
     </div>
