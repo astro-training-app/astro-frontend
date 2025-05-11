@@ -18,6 +18,11 @@
   }
 }
 
+/* la c'est pour les inputs */
+.input-style {
+  @apply w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white;
+}
+
 /* Appliquer les couleurs à toute la page */
 html,
 body {

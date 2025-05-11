@@ -28,6 +28,9 @@ export default function Navbar() {
       <div className="flex gap-4 text-sm sm:text-base">
         {isAuthenticated && (
           <>
+            <Link href="/ajouter-client" className="hover:underline">
+              Ajouter un client
+            </Link>
             <Link href="/profil" className="hover:underline">
               Mon Profil
             </Link>
