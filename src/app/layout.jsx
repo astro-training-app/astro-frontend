@@ -3,7 +3,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { AuthProvider } from "@/contexts/AuthContext"; // ✅ déjà importé
+import { AuthProvider } from "@/contexts/AuthContext";
+import SessionPrompt from "@/components/SessionPrompt";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,10 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} bg-background text-foreground`}>
         <AuthProvider>
           <Navbar />
+          <SessionPrompt />
+
           <main className="p-4">{children}</main>
+
           <Footer />
         </AuthProvider>
       </body>
