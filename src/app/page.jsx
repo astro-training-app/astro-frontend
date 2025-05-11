@@ -3,12 +3,13 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Button from "@/components/Button";
-import { useAuth } from "@/contexts/AuthContext"; // petit test //
+import { useAuth } from "@/contexts/AuthContext";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
+import TestToast from "./test-toast/page"; // composant de test toast si tu veux le garder
 
 export default function Home() {
   const router = useRouter();
-  const { isAuthenticated } = useAuth(); // il faut bien le mettre dans un fonction sinon nope //
+  const { isAuthenticated } = useAuth();
 
   return (
     <MotionLayoutWrapper>
@@ -24,7 +25,7 @@ export default function Home() {
           personnaliser les programmes sportifs entre coachs et clients.
         </p>
 
-        {/* Boutons (empilés sur mobile, côte à côte sur grand écran) */}
+        {/* Boutons */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <Button color="blue" onClick={() => router.push("/devenir-coach")}>
             Devenir coach
@@ -45,9 +46,13 @@ export default function Home() {
           height={256}
           className="rounded shadow-lg"
         />
-        <p className="text-lg">
+
+        {/* Test auth + toast */}
+        <p className="text-lg mt-4">
           isAuthenticated : {isAuthenticated ? "✅ Connecté" : "❌ Déconnecté"}
         </p>
+
+        <TestToast />
       </main>
     </MotionLayoutWrapper>
   );

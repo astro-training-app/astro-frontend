@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useAuth } from "@/contexts/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 
@@ -10,20 +11,23 @@ const url = "http://localhost:3000/api";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggued, setLogged] = useState(false);
   const [message, setMessage] = useState("");
   const { setIsAuthenticated } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    toast.info("Test de toast : Connexion à l'application", {
+      position: "top-right",
+      autoClose: 3000,
+    });
+  }, []);
 
   const verification = async (e) => {
     e.preventDefault();
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    const body = JSON.stringify({
-      email,
-      password,
-    });
+    const body = JSON.stringify({ email, password });
 
     const res = await fetch(url + "/auth/login", {
       method: "POST",
@@ -36,12 +40,14 @@ export default function Login() {
     setMessage(data.message);
 
     if (res.ok) {
-      setLogged(true);
       Cookies.set("token", data.token, { expires: cookieTimer });
       setIsAuthenticated(true);
-      router.push("/profil");
+      toast.success("Connexion réussie !");
+      setTimeout(() => {
+        router.push("/trouver-coach");
+      }, 2000);
     } else {
-      setLogged(false);
+      toast.error("Email ou mot de passe incorrect");
     }
   };
 
@@ -82,16 +88,20 @@ export default function Login() {
           </form>
 
           {message && (
-            <p
-              className={`mt-4 text-center ${
-                loggued ? "text-green-400" : "text-red-400"
-              }`}
-            >
-              {message}
-            </p>
+            <p className="mt-4 text-center">{message}</p>
           )}
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="dark"
+        style={{ top: "20%" }}
+      />
     </MotionLayoutWrapper>
   );
 }

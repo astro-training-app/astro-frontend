@@ -8,7 +8,7 @@ export default function LogoutButton() {
 
   const handleLogout = () => {
     logout(); // supprime le token
-    router.push("/"); // redirige vers l’accueil
+    router.push("/"); // redirige vers l’accueil immédiatement
   };
 
   return (
