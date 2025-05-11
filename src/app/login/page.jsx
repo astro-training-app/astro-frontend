@@ -1,16 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useAuth } from "@/contexts/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const url = "http://localhost:3000/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggued, setLogged] = useState(false);
   const [message, setMessage] = useState("");
   const { setIsAuthenticated } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    toast.info("Test de toast : Connexion à l'application", {
+      position: "top-right",
+      autoClose: 3000, // Durée d'affichage de 3 secondes
+    });
+  }, []);
 
   const verification = async (e) => {
     e.preventDefault();
@@ -33,11 +42,14 @@ export default function Login() {
     setMessage(data.message);
     console.log(data);
     if (res.ok) {
-      setLogged(true);
       Cookies.set("token", data.token, { expires: cookieTimer });
       setIsAuthenticated(true); // dis au contexte qu'on est connecté
+      toast.success("Connexion réussie !");
+      setTimeout(() => {
+        router.push("/trouver-coach");
+      }, 2000); // délai suffisant
     } else {
-      setLogged(false);
+      toast.error("Email ou mot de passe incorrect");
     }
   };
 
@@ -76,16 +88,18 @@ export default function Login() {
           </button>
         </form>
 
-        {message && (
-          <p
-            className={`mt-4 text-center ${
-              loggued ? "text-green-400" : "text-red-400"
-            }`}
-          >
-            {message}
-          </p>
-        )}
+        {message && <p className="mt-4 text-center">{message}</p>}
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="dark"
+        style={{ top: "20%" }} // Positionné aux deux tiers de l'écran
+      />
     </div>
   );
 }

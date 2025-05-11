@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Button from "@/components/Button";
 import { useAuth } from "@/contexts/AuthContext"; // petit test //
+import TestToast from "./test-toast/page"; // ptit test //
 
 export default function Home() {
   const router = useRouter();
@@ -46,6 +47,7 @@ export default function Home() {
       <p className="text-lg">
         isAuthenticated : {isAuthenticated ? "✅ Connecté" : "❌ Déconnecté"}
       </p>
+      <TestToast />
     </main>
   );
 }

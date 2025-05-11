@@ -5,6 +5,7 @@
 }
 
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const url = "http://localhost:3000/api";
 
@@ -18,37 +19,44 @@ export default function DevenirCoach() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false); // je met ça en test pour vérif le toast //
+
   {
     /* fonction pou rle formulaire */
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Nom :", nom);
-    console.log("Email :", email);
-    console.log("Mot de passe :", password);
+    setIsLoading(true); // ⏳ début du chargement
 
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    const body = JSON.stringify({
-      nom,
-      email,
-      password,
-    });
 
-    const res = await fetch(url + "/auth/register", {
-      method: "POST",
-      headers,
-      body,
-    });
-    console.log(res);
-    const data = await res.json();
-    setMessage(data.message);
-    if (res.ok) {
+    const body = JSON.stringify({ nom, email, password });
+
+    try {
+      const res = await fetch(url + "/auth/register", {
+        method: "POST",
+        headers,
+        body,
+      });
+
+      const data = await res.json();
+      setMessage(data.message);
+
+      if (res.ok) {
+        toast.success("🎉 Compte coach créé avec succès !");
+      } else {
+        toast.error("❌ Erreur à la création du compte.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("⚠️ Problème réseau ou serveur !");
+    } finally {
+      setIsLoading(false); // ✅ on arrête le loader quoi qu’il arrive
     }
   };
-
+  
   return (
     <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
       <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
