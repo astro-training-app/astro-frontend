@@ -1,7 +1,8 @@
 "use client";
+
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
-import { useRouter } from "next/navigation";
 
 export default function Profil() {
   const { isAuthenticated } = useAuth();
@@ -42,12 +43,21 @@ export default function Profil() {
         <p>
           <strong>Objectif :</strong> Aider mes clients à briller ! 💫
         </p>
-        <button
-          onClick={() => router.push("/clients")}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Aller vers Mes Clients
-        </button>
+        {/* 🧩 Boutons d'action */}
+        <div className="mt-6 flex flex-col sm:flex-row gap-4">
+          <button
+            onClick={() => router.push("/ajouter-client")}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+          >
+            ➕ Ajouter un client
+          </button>
+          <button
+            onClick={() => router.push("/clients")}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded"
+          >
+            👥 Voir mes clients
+          </button>
+        </div>
       </div>
     </main>
   );

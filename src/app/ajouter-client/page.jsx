@@ -1,4 +1,5 @@
 "use client";
+
 import ClientForm from "@/components/clients/ClientForm";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 
