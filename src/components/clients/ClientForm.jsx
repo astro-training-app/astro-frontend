@@ -88,21 +88,11 @@ export default function ClientForm() {
 
       <div className="flex gap-4">
         <label>
-          <input
-            type="radio"
-            name="sexe"
-            value="homme"
-            onChange={handleChange}
-          />{" "}
+          <input type="radio" name="sexe" value="H" onChange={handleChange} />{" "}
           Homme
         </label>
         <label>
-          <input
-            type="radio"
-            name="sexe"
-            value="femme"
-            onChange={handleChange}
-          />{" "}
+          <input type="radio" name="sexe" value="F" onChange={handleChange} />{" "}
           Femme
         </label>
       </div>
