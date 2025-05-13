@@ -1,12 +1,12 @@
 "use client";
+
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
-const url = "http://localhost:3000/api/mensurations";
 
-export default function FormulaireMensurations() {
-  const [mensurations, setMensurations] = useState({
+export default function FormulaireMensurations({ clientId }) {
+  const [formData, setFormData] = useState({
     date_mesure: "",
     poids: "",
     taille: "",
@@ -16,62 +16,55 @@ export default function FormulaireMensurations() {
     tour_cuisse: "",
   });
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
-    setMensurations((prev) => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     try {
       const token = Cookies.get("token");
 
-      const response = await fetch(url, {
+      const response = await fetch("http://localhost:3000/api/mensurations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(mensurations),
+        body: JSON.stringify({
+          ...formData,
+          poids: parseFloat(formData.poids),
+          taille: parseFloat(formData.taille),
+          tour_biceps: parseFloat(formData.tour_biceps),
+          tour_poitrine: parseFloat(formData.tour_poitrine),
+          tour_taille: parseFloat(formData.tour_taille),
+          tour_cuisse: parseFloat(formData.tour_cuisse),
+          client_id: parseInt(clientId), // 🧠 la ligne clé
+        }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to submit mensurations");
-      }
-
-      // Réinitialisation des valeurs de mensurations
-      setMensurations({
-        date_mesure: "",
-        poids: "",
-        taille: "",
-        tour_biceps: "",
-        tour_poitrine: "",
-        tour_taille: "",
-        tour_cuisse: "",
-      });
-
-      toast.success("Mensurations enregistrées avec succès !");
-    } catch (error) {
-      toast.error("Erreur lors de l'enregistrement des mensurations");
-      console.error(error);
+      const result = await response.json();
+      console.log("✅ Mensuration envoyée :", result);
+    } catch (err) {
+      console.error("❌ Erreur :", err);
     }
-  };
+  }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 p-6 bg-gray-800 text-white max-w-md mx-auto rounded-lg"
+      className="space-y-4 p-6 bg-gray-800 rounded-xl text-white max-w-md mx-auto"
     >
-      <h2 className="text-2xl font-bold mb-4">Ajouter une mensuration</h2>
+      <h2 className="text-2xl font-bold">Ajouter une mensuration</h2>
 
       <input
         type="date"
         name="date_mesure"
-        value={mensurations.date_mesure}
         onChange={handleChange}
         className="input-style"
       />
@@ -80,61 +73,50 @@ export default function FormulaireMensurations() {
         type="number"
         name="poids"
         placeholder="Poids (kg)"
-        value={mensurations.poids}
         onChange={handleChange}
         className="input-style"
       />
-
       <input
         type="number"
         name="taille"
         placeholder="Taille (cm)"
-        value={mensurations.taille}
         onChange={handleChange}
         className="input-style"
       />
-
       <input
         type="number"
         name="tour_biceps"
         placeholder="Tour de biceps (cm)"
-        value={mensurations.tour_biceps}
         onChange={handleChange}
         className="input-style"
       />
-
       <input
         type="number"
         name="tour_poitrine"
         placeholder="Tour de poitrine (cm)"
-        value={mensurations.tour_poitrine}
         onChange={handleChange}
         className="input-style"
       />
-
       <input
         type="number"
         name="tour_taille"
         placeholder="Tour de taille (cm)"
-        value={mensurations.tour_taille}
         onChange={handleChange}
         className="input-style"
       />
-
       <input
         type="number"
         name="tour_cuisse"
         placeholder="Tour de cuisse (cm)"
-        value={mensurations.tour_cuisse}
         onChange={handleChange}
         className="input-style"
       />
 
       <button
         type="submit"
-        className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded"
+        className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
       >
-        Enregistrer
+        Enregistrer la mensuration
       </button>
     </form>
   );

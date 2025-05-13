@@ -44,7 +44,7 @@ export default function Login() {
       setIsAuthenticated(true);
       toast.success("Connexion réussie !");
       setTimeout(() => {
-        router.push("/trouver-coach");
+        router.push("/profil");
       }, 2000);
     } else {
       toast.error("Email ou mot de passe incorrect");
@@ -87,9 +87,7 @@ export default function Login() {
             </button>
           </form>
 
-          {message && (
-            <p className="mt-4 text-center">{message}</p>
-          )}
+          {message && <p className="mt-4 text-center">{message}</p>}
         </div>
       </div>
       <ToastContainer
@@ -105,3 +103,4 @@ export default function Login() {
     </MotionLayoutWrapper>
   );
 }
+
