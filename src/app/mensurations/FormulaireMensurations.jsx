@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
-
-export default function FormulaireMensurations({ clientId }) {
+export default function FormulaireMensurations({ clientId, onNewMensuration }) {
   const [formData, setFormData] = useState({
     date_mesure: "",
     poids: "",
@@ -16,6 +15,27 @@ export default function FormulaireMensurations({ clientId }) {
     tour_cuisse: "",
   });
 
+  const [mensurations, setMensurations] = useState([]);
+
+  // Récupérer les mensurations du client
+  useEffect(() => {
+    const fetchMensurations = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:3000/api/mensurations/client/${clientId}`
+        );
+        const data = await res.json();
+        setMensurations(data);
+      } catch (error) {
+        console.error("Erreur lors du chargement :", error);
+        toast.error("Erreur lors du chargement des mensurations.");
+      }
+    };
+
+    fetchMensurations();
+  }, [clientId]);
+
+  // Gérer les changements dans les champs du formulaire
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -24,6 +44,7 @@ export default function FormulaireMensurations({ clientId }) {
     }));
   }
 
+  // Envoi du formulaire
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -44,80 +65,105 @@ export default function FormulaireMensurations({ clientId }) {
           tour_poitrine: parseFloat(formData.tour_poitrine),
           tour_taille: parseFloat(formData.tour_taille),
           tour_cuisse: parseFloat(formData.tour_cuisse),
-          client_id: parseInt(clientId), // 🧠 la ligne clé
+          client_id: parseInt(clientId),
         }),
       });
 
       const result = await response.json();
-      console.log("✅ Mensuration envoyée :", result);
+
+      if (!response.ok) throw new Error(result.message);
+
+      toast.success("✅ Mensuration enregistrée !");
+      setFormData({
+        date_mesure: "",
+        poids: "",
+        taille: "",
+        tour_biceps: "",
+        tour_poitrine: "",
+        tour_taille: "",
+        tour_cuisse: "",
+      });
+      if (onNewMensuration) onNewMensuration();
+      // Recharger la liste
+      setMensurations((prev) => [...prev, result]);
     } catch (err) {
       console.error("❌ Erreur :", err);
+      toast.error("❌ Une erreur est survenue.");
     }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 p-6 bg-gray-800 rounded-xl text-white max-w-md mx-auto"
-    >
-      <h2 className="text-2xl font-bold">Ajouter une mensuration</h2>
-
-      <input
-        type="date"
-        name="date_mesure"
-        onChange={handleChange}
-        className="input-style"
-      />
-
-      <input
-        type="number"
-        name="poids"
-        placeholder="Poids (kg)"
-        onChange={handleChange}
-        className="input-style"
-      />
-      <input
-        type="number"
-        name="taille"
-        placeholder="Taille (cm)"
-        onChange={handleChange}
-        className="input-style"
-      />
-      <input
-        type="number"
-        name="tour_biceps"
-        placeholder="Tour de biceps (cm)"
-        onChange={handleChange}
-        className="input-style"
-      />
-      <input
-        type="number"
-        name="tour_poitrine"
-        placeholder="Tour de poitrine (cm)"
-        onChange={handleChange}
-        className="input-style"
-      />
-      <input
-        type="number"
-        name="tour_taille"
-        placeholder="Tour de taille (cm)"
-        onChange={handleChange}
-        className="input-style"
-      />
-      <input
-        type="number"
-        name="tour_cuisse"
-        placeholder="Tour de cuisse (cm)"
-        onChange={handleChange}
-        className="input-style"
-      />
-
-      <button
-        type="submit"
-        className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+    <>
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4 p-6 bg-gray-800 rounded-xl text-white max-w-md mx-auto"
       >
-        Enregistrer la mensuration
-      </button>
-    </form>
+        <h2 className="text-2xl font-bold">Ajouter une mensuration</h2>
+
+        <input
+          type="date"
+          name="date_mesure"
+          value={formData.date_mesure}
+          onChange={handleChange}
+          className="input-style"
+        />
+
+        <input
+          type="number"
+          name="poids"
+          placeholder="Poids (kg)"
+          value={formData.poids}
+          onChange={handleChange}
+          className="input-style"
+        />
+        <input
+          type="number"
+          name="taille"
+          placeholder="Taille (cm)"
+          value={formData.taille}
+          onChange={handleChange}
+          className="input-style"
+        />
+        <input
+          type="number"
+          name="tour_biceps"
+          placeholder="Tour de biceps (cm)"
+          value={formData.tour_biceps}
+          onChange={handleChange}
+          className="input-style"
+        />
+        <input
+          type="number"
+          name="tour_poitrine"
+          placeholder="Tour de poitrine (cm)"
+          value={formData.tour_poitrine}
+          onChange={handleChange}
+          className="input-style"
+        />
+        <input
+          type="number"
+          name="tour_taille"
+          placeholder="Tour de taille (cm)"
+          value={formData.tour_taille}
+          onChange={handleChange}
+          className="input-style"
+        />
+        <input
+          type="number"
+          name="tour_cuisse"
+          placeholder="Tour de cuisse (cm)"
+          value={formData.tour_cuisse}
+          onChange={handleChange}
+          className="input-style"
+        />
+
+        <button
+          type="submit"
+          className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Enregistrer la mensuration
+        </button>
+      </form>
+    </>
   );
 }

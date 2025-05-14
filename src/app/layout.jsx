@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
 import SessionPrompt from "@/components/SessionPrompt";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +24,7 @@ export default function RootLayout({ children }) {
           <SessionPrompt />
 
           <main className="p-4">{children}</main>
-
+          <ToastContainer position="top-center" autoClose={3000} />
           <Footer />
         </AuthProvider>
       </body>

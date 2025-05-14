@@ -1,3 +1,7 @@
+"use client";
+
+import Link from "next/link";
+
 export default function ClientCard({ client }) {
   const { prenom, nom, email, age, sexe, objectif, created_at, photo } = client;
 
@@ -39,6 +43,11 @@ export default function ClientCard({ client }) {
           <span className="font-medium">Inscrit le :</span>{" "}
           {new Date(created_at).toLocaleDateString()}
         </p>
+        <Link href={`/mock-client/${client.id}`}>
+          <button className="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 w-full">
+            🧪 Page test mensurations
+          </button>
+        </Link>
       </div>
     </div>
   );
