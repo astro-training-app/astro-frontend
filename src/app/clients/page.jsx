@@ -9,6 +9,22 @@ export default function ClientList() {
   const [clients, setClients] = useState([]);
   const checking = useProtectedRoute();
 
+  async function handleDeleteClient(id) {
+    const res = await fetch(`http://localhost:3000/api/clients/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    });
+
+    if (res.ok) {
+      setClients((prev) => prev.filter((c) => c.id !== id));
+    } else {
+      console.error("Erreur de suppression");
+    }
+  }
+
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -47,7 +63,11 @@ export default function ClientList() {
       <h1 className="text-xl font-bold mb-4">Liste des clients</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-5">
         {clients.map((client) => (
-          <ClientCard key={client.id} client={client} />
+          <ClientCard
+            key={client.id}
+            client={client}
+            onDelete={handleDeleteClient}
+          />
         ))}
       </div>
     </div>

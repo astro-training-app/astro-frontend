@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Cookies from "js-cookie";
 
-export default function ClientCard({ client }) {
+export default function ClientCard({ client, onDelete }) {
   const { prenom, nom, email, age, sexe, objectif, created_at, photo } = client;
 
   const sexeLabel = sexe === "H" ? "Homme" : sexe === "F" ? "Femme" : "Autre";
@@ -43,6 +44,12 @@ export default function ClientCard({ client }) {
           <span className="font-medium">Inscrit le :</span>{" "}
           {new Date(created_at).toLocaleDateString()}
         </p>
+        <button
+          onClick={() => onDelete(client.id)}
+          className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 w-full"
+        >
+          Supprimer
+        </button>
         <Link href={`/mock-client/${client.id}`}>
           <button className="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 w-full">
             🧪 Page test mensurations
