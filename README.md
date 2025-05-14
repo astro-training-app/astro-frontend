@@ -14,6 +14,8 @@ pnpm dev
 bun dev
 ```
 
+bonjour
+
 # 🚀 Sprint 0 — Astro Training App (Front-end)
 
 ## 📚 Objectif
