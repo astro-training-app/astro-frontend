@@ -20,12 +20,16 @@ export default function RootLayout({ children }) {
     <html lang="fr">
       <body className={`${inter.className} bg-background text-foreground`}>
         <AuthProvider>
-          <Navbar />
-          <SessionPrompt />
+          <div className="h-screen flex flex-row justify-between">
+            <Navbar />
+            <div className="flex flex-col h-full w-full">
+              <SessionPrompt />
 
-          <main className="p-4">{children}</main>
-          <ToastContainer position="top-center" autoClose={3000} />
-          <Footer />
+              <main className="p-4 w-full">{children}</main>
+              <ToastContainer position="top-center" autoClose={3000} />
+              <Footer />
+            </div>
+          </div>
         </AuthProvider>
       </body>
     </html>

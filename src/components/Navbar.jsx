@@ -4,6 +4,16 @@ import Link from "next/link";
 import LogoutButton from "./logoutButton";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from "react";
+import NavBarLink from "./links/NavBarLink";
+import {
+  House,
+  UserPlus,
+  Handshake,
+  Users,
+  User,
+  LogIn,
+  LogOut,
+} from "lucide-react";
 
 export default function Navbar() {
   const [theme, setTheme] = useState("light");
@@ -18,52 +28,49 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full px-6 py-4 bg-background text-foreground flex items-center justify-between shadow-md">
+    <nav className="w-96 px-6 py-4 bg-white text-foreground flex gap-5 flex-start flex-col items-center shadow-md justify-between *:w-full">
       {/* Logo */}
-      <Link href="/" className="text-xl font-bold">
-        🦾 FitCoach
+      <Link href="/" className="w-full text-xl font-bold center-left">
+        FitCoach
       </Link>
 
       {/* Liens */}
-      <div className="flex gap-4 text-sm sm:text-base">
+      <div className="h-full flex flex-col flex-start gap-4 text-sm sm:text-base *:h-12 *:flex *:items-center">
+        <NavBarLink href="/" icon={<House />}>
+          Home
+        </NavBarLink>
         {isAuthenticated && (
-          <>
-            <Link href="/ajouter-client" className="hover:underline">
-              Ajouter un client
-            </Link>
-            <Link href="/profil" className="hover:underline">
-              Mon Profil
-            </Link>
-            <Link href="/clients" className="hover:underline">
-              Mes Clients
-            </Link>
-            <Link href="/page-animation" className="hover:underline">
-              Page animée ✨
-            </Link>
-          </>
+          <NavBarLink href="/clients" icon={<Users />}>
+            Clients
+          </NavBarLink>
         )}
 
-        {!isAuthenticated && (
-          <Link href="/devenir-coach" className="hover:underline">
-            Devenir coach
-          </Link>
+        <NavBarLink href="/trouver-coach" icon={<Handshake />}>
+          Partners
+        </NavBarLink>
+        {isAuthenticated && (
+          <NavBarLink href="/profil" icon={<User />}>
+            Profil
+          </NavBarLink>
         )}
-        <Link href="/trouver-coach" className="hover:underline">
-          Trouver coach
-        </Link>
         {!isAuthenticated && (
-          <Link href="/login" className="hover:underline">
-            S'identifier
-          </Link>
+          <NavBarLink href="/login" icon={<LogIn />}>
+            Login
+          </NavBarLink>
+        )}
+        {!isAuthenticated && (
+          <NavBarLink href="/devenir-coach" icon={<UserPlus />}>
+            Sign up
+          </NavBarLink>
         )}
         {isAuthenticated && <LogoutButton />}
-        <button
-          onClick={toggleTheme}
-          className="ml-4 px-2 py-1 rounded border text-xs sm:text-sm"
-        >
-          {theme === "light" ? "🌙 Sombre" : "☀️ Clair"}
-        </button>
       </div>
+      <button
+        onClick={toggleTheme}
+        className="ml-4 px-2 py-1 rounded border text-xs sm:text-sm"
+      >
+        {theme === "light" ? "🌙 Sombre" : "☀️ Clair"}
+      </button>
     </nav>
   );
 }

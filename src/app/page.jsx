@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <MotionLayoutWrapper>
-      <main className="min-h-screen flex flex-col items-center justify-center px-4 py-8 bg-background text-foreground">
+      <div className="flex flex-col items-center justify-center px-4 py-8 bg-background text-foreground">
         {/* Titre principal */}
         <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-center">
           FitCoach 🦾
@@ -51,9 +51,7 @@ export default function Home() {
         <p className="text-lg mt-4">
           isAuthenticated : {isAuthenticated ? "✅ Connecté" : "❌ Déconnecté"}
         </p>
-
-        <TestToast />
-      </main>
+      </div>
     </MotionLayoutWrapper>
   );
 }
