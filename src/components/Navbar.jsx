@@ -12,7 +12,8 @@ import {
   Users,
   User,
   LogIn,
-  LogOut,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 export default function Navbar() {
@@ -28,14 +29,17 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-96 px-6 py-4 bg-white text-foreground flex gap-5 flex-start flex-col items-center shadow-md justify-between *:w-full">
+    <nav className="w-96 bg-white text-foreground flex flex-start flex-col items-center shadow-md justify-between *:w-full">
       {/* Logo */}
-      <Link href="/" className="w-full text-xl font-bold center-left">
+      <Link
+        href="/"
+        className="w-full text-xl text-blue-600 font-bold center-left p-6"
+      >
         FitCoach
       </Link>
 
       {/* Liens */}
-      <div className="h-full flex flex-col flex-start gap-4 text-sm sm:text-base *:h-12 *:flex *:items-center">
+      <div className="h-full flex flex-col flex-start text-sm sm:text-base p-4 border-t border-t-gray-200 *:h-12 *:mt-2 *:flex *:items-center">
         <NavBarLink href="/" icon={<House />}>
           Home
         </NavBarLink>
@@ -65,12 +69,15 @@ export default function Navbar() {
         )}
         {isAuthenticated && <LogoutButton />}
       </div>
-      <button
-        onClick={toggleTheme}
-        className="ml-4 px-2 py-1 rounded border text-xs sm:text-sm"
-      >
-        {theme === "light" ? "🌙 Sombre" : "☀️ Clair"}
-      </button>
+      <div className="flex flex-col flex-start text-sm sm:text-base p-4 border-t border-t-gray-200 *:h-12 *:mt-2 *:flex *:items-center">
+        <NavBarLink
+          onClick={toggleTheme}
+          className="ml-4 px-2 py-1 rounded border text-xs sm:text-sm"
+          icon={theme === "light" ? <Sun /> : <Moon />}
+        >
+          {theme === "light" ? "Dark" : "Light"} Mode
+        </NavBarLink>
+      </div>
     </nav>
   );
 }
