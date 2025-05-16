@@ -7,11 +7,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#fefefe",
+        foreground: "#111111",
       },
     },
   },
-  darkMode: "class",
   plugins: [],
 };

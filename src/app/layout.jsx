@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
-      <body className={`${inter.className} bg-background text-foreground`}>
+      <body className={`bg-white text-black`}>
         <AuthProvider>
           <div className="h-screen flex flex-row justify-between">
             <Navbar />

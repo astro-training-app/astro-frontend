@@ -53,8 +53,8 @@ export default function Login() {
 
   return (
     <MotionLayoutWrapper>
-      <div className="min-h-screen bg-gray-900 text-gray-900 dark:text-white flex items-center justify-center">
-        <div className="bg-gray-200 dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
+      <div className="min-h-screen bg-gray-900 text-gray-900 flex items-center justify-center">
+        <div className="bg-gray-200 p-8 rounded-lg shadow-md w-full max-w-md">
           <h1 className="text-3xl font-bold mb-6 text-center">Connexion</h1>
           <form onSubmit={verification} className="space-y-4">
             <div>
@@ -65,7 +65,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Votre email"
                 required
-                className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600"
+                className="w-full px-4 py-2 rounded bg-gray-100  text-gray-900 border border-gray-300"
               />
             </div>
             <div>
@@ -76,7 +76,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Votre mot de passe"
                 required
-                className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600"
+                className="w-full px-4 py-2 rounded bg-gray-100 text-gray-900 border border-gray-300"
               />
             </div>
             <button
@@ -103,4 +103,3 @@ export default function Login() {
     </MotionLayoutWrapper>
   );
 }
-

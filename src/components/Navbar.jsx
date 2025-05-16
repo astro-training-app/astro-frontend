@@ -5,7 +5,6 @@ import LogoutButton from "./logoutButton";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from "react";
 import NavBarLink from "./links/NavBarLink";
-import { useTheme } from "next-themes";
 import {
   House,
   UserPlus,
