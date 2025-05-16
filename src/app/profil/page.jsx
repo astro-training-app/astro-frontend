@@ -11,26 +11,22 @@ export default function Profil() {
 
   if (checking)
     return (
-      <p className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white p-10 rounded-lg">
-        Chargement...
-      </p>
+      <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Chargement...</p>
     );
 
   if (!isAuthenticated) {
     return (
-      <p className="bg-red-100 dark:bg-red-800 text-red-600 dark:text-red-400 p-10 rounded-lg">
+      <p className="bg-red-100 text-red-600 p-10 rounded-lg">
         Accès refusé. Veuillez vous connecter pour accéder à cette page.
       </p>
     );
   }
 
   return (
-    <main className="min-h-screen p-10 text-gray-800 dark:text-white">
-      <div className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg">
+    <main className="min-h-screen p-10 text-gray-800">
+      <div className="bg-gray-200 p-6 rounded-lg">
         <h1 className="text-3xl font-bold mb-4">Mon Profil</h1>
-        <p className="text-green-600 dark:text-green-400">
-          Vous êtes connecté !
-        </p>
+        <p className="text-green-600">Vous êtes connecté !</p>
         <p>
           <strong>Nom :</strong> Arthur Coach
         </p>

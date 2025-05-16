@@ -13,7 +13,7 @@ export default function PageTransition({ children }) {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -100 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen p-10 text-black dark:text-white bg-gray-100 dark:bg-gray-900"
+        className="min-h-screen p-10 text-black bg-gray-100"
       >
         {children}
       </motion.div>

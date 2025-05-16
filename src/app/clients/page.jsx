@@ -53,9 +53,7 @@ export default function ClientList() {
 
   if (checking)
     return (
-      <p className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white p-10 rounded-lg">
-        Chargement...
-      </p>
+      <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Chargement...</p>
     );
 
   return (
