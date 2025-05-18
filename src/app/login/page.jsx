@@ -15,13 +15,6 @@ export default function Login() {
   const { setIsAuthenticated } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    toast.info("Test de toast : Connexion à l'application", {
-      position: "top-right",
-      autoClose: 3000,
-    });
-  }, []);
-
   const verification = async (e) => {
     e.preventDefault();
 
@@ -90,16 +83,6 @@ export default function Login() {
           {message && <p className="mt-4 text-center">{message}</p>}
         </div>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        pauseOnHover
-        theme="dark"
-        style={{ top: "20%" }}
-      />
     </MotionLayoutWrapper>
   );
 }

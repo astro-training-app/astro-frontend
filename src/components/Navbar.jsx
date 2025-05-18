@@ -15,6 +15,7 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const { isAuthenticated } = useAuth();
@@ -58,7 +59,9 @@ export default function Navbar() {
         )}
         {isAuthenticated && <LogoutButton />}
       </div>
-      <div className="flex flex-col flex-start text-sm sm:text-base p-4 border-t border-t-gray-200 *:h-12 *:mt-2 *:flex *:items-center"></div>
+      <div className="flex flex-col flex-start text-sm sm:text-base p-4 border-t border-t-gray-200 *:h-12 *:mt-2 *:flex *:items-center">
+        <ThemeToggle />
+      </div>
     </nav>
   );
 }

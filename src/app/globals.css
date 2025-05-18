@@ -1,16 +1,22 @@
 @import "tailwindcss";
-
-/* 🌙 Gestion du thème clair et sombre */
-
-:root {
-  --background: #fefefe;
-  --foreground: #111111;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer components {
   .input-style {
     @apply w-full px-3 py-2 bg-gray-700 rounded text-white;
   }
+}
+
+:root {
+  --primary: oklch(54.6% 0.245 262.881);
+}
+
+.dark {
+  --primary: oklch(54.6% 0.245 262.881);
+}
+
+@theme {
+  --color-primary: var(--primary);
 }
 
 /* la c'est pour les inputs */
@@ -21,8 +27,6 @@
 /* Appliquer les couleurs à toute la page */
 html,
 body {
-  background-color: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }

@@ -8,7 +8,7 @@ import { ChevronRight } from "lucide-react";
 function NavBarLink({ children, href, icon, onClick, variant = "primary" }) {
   const pathname = usePathname();
   const isActive = href === pathname;
-  const primaryStyles = "text-gray-700  hover:bg-gray-100";
+  const primaryStyles = "text-gray-700 hover:bg-gray-100";
   const primarySelectedStyle = "bg-blue-600/15 text-blue-600";
 
   const secondaryStyles = "text-red-600  hover:bg-red-100/50";
