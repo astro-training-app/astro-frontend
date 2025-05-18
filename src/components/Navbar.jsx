@@ -15,29 +15,19 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("light");
   const { isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    document.documentElement.className = theme;
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-
   return (
-    <nav className="w-96 bg-white text-foreground flex flex-start flex-col items-center shadow-md justify-between *:w-full">
-      {/* Logo */}
+    <nav className="w-96  flex flex-start flex-col items-center shadow-md justify-between *:w-full">
       <Link
         href="/"
-        className="w-full text-xl text-blue-600 font-bold center-left p-6"
+        className="w-full text-xl text-primary font-bold center-left p-6"
       >
         FitCoach
       </Link>
-
       {/* Liens */}
       <div className="h-full flex flex-col flex-start text-sm sm:text-base p-4 border-t border-t-gray-200 *:h-12 *:mt-2 *:flex *:items-center">
         <NavBarLink href="/" icon={<House />}>
@@ -70,13 +60,7 @@ export default function Navbar() {
         {isAuthenticated && <LogoutButton />}
       </div>
       <div className="flex flex-col flex-start text-sm sm:text-base p-4 border-t border-t-gray-200 *:h-12 *:mt-2 *:flex *:items-center">
-        <NavBarLink
-          onClick={toggleTheme}
-          className="ml-4 px-2 py-1 rounded border text-xs sm:text-sm"
-          icon={theme === "light" ? <Sun /> : <Moon />}
-        >
-          {theme === "light" ? "Dark" : "Light"} Mode
-        </NavBarLink>
+        <ThemeToggle />
       </div>
     </nav>
   );

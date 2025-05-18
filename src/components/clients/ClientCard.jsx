@@ -9,9 +9,9 @@ export default function ClientCard({ client, onDelete }) {
   const sexeLabel = sexe === "H" ? "Homme" : sexe === "F" ? "Femme" : "Autre";
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 w-full max-w-md">
+    <div className="bg-white rounded-2xl shadow p-6 w-full max-w-md">
       <div className="flex items-center space-x-4">
-        <div className="w-16 h-16 rounded-full bg-gray-300 dark:bg-gray-700 flex items-center justify-center text-xl font-bold text-white">
+        <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center text-xl font-bold text-white">
           {photo ? (
             <img
               src={photo}
@@ -23,14 +23,14 @@ export default function ClientCard({ client, onDelete }) {
           )}
         </div>
         <div>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-semibold text-gray-900">
             {prenom} {nom}
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{email}</p>
+          <p className="text-sm text-gray-500">{email}</p>
         </div>
       </div>
 
-      <div className="mt-4 space-y-2 text-sm text-gray-800 dark:text-gray-200">
+      <div className="mt-4 space-y-2 text-sm text-gray-800">
         <p>
           <span className="font-medium">Âge :</span> {age} ans
         </p>
