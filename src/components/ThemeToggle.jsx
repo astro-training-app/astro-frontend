@@ -3,9 +3,10 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import NavBarLink from "./links/NavBarLink";
+import { Sun, Moon } from "lucide-react";
 
 export default function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -17,11 +18,12 @@ export default function ThemeToggle() {
   return (
     <NavBarLink
       onClick={() => {
-        setTheme(resolvedTheme === "dark" ? "light" : "dark");
+        setTheme(theme === "dark" ? "light" : "dark");
       }}
       className="p-2 rounded border"
+      icon={theme === "dark" ? <Sun /> : <Moon />}
     >
-      {resolvedTheme === "dark" ? "☀️" : "🌙"}
+      {theme === "dark" ? "Light" : "Dark"} mode
     </NavBarLink>
   );
 }

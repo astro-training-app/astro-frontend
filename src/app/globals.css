@@ -1,32 +1,30 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-@layer components {
-  .input-style {
-    @apply w-full px-3 py-2 bg-gray-700 rounded text-white;
-  }
-}
-
 :root {
   --primary: oklch(54.6% 0.245 262.881);
+  --secondary: #333333;
+  --background: #fdfdfd;
+  --btn-hover: #f3f4f6;
 }
 
 .dark {
   --primary: oklch(54.6% 0.245 262.881);
+  --secondary: #d2d2d2;
+  --btn-hover: #1e1e1e;
+  --background: #121212;
 }
 
 @theme {
   --color-primary: var(--primary);
-}
-
-/* la c'est pour les inputs */
-.input-style {
-  @apply w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white;
+  --color-btn-hover: var(--btn-hover);
+  --color-secondary: var(--secondary);
 }
 
 /* Appliquer les couleurs à toute la page */
 html,
 body {
+  background-color: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }

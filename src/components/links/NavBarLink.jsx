@@ -8,11 +8,11 @@ import { ChevronRight } from "lucide-react";
 function NavBarLink({ children, href, icon, onClick, variant = "primary" }) {
   const pathname = usePathname();
   const isActive = href === pathname;
-  const primaryStyles = "text-gray-700 hover:bg-gray-100";
+  const primaryStyles = "text-secondary hover:bg-btn-hover";
   const primarySelectedStyle = "bg-blue-600/15 text-blue-600";
 
-  const secondaryStyles = "text-red-600  hover:bg-red-100/50";
-  const secondarySelectedStyle = "bg-red-100/50 text-red-600";
+  const secondaryStyles = "text-red-600  hover:bg-red-500/10";
+  const secondarySelectedStyle = "bg-red-500/10 text-red-600";
 
   const styles = variant === "primary" ? primaryStyles : secondaryStyles;
   const selectedStyle =
@@ -20,7 +20,7 @@ function NavBarLink({ children, href, icon, onClick, variant = "primary" }) {
 
   const content = (
     <>
-      <div className="flex items-center gap-2">
+      <div className="font-normal flex items-center gap-2">
         {/* align icon center */}
         <span className="w-5 h-5 flex items-center">{icon}</span>
 
