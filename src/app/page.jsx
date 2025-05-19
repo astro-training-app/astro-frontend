@@ -2,10 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Button from "@/components/Button";
+import Button from "@/components/mensurations/buttons/Button";
 import { useAuth } from "@/contexts/AuthContext";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
-import TestToast from "./test-toast/page"; // composant de test toast si tu veux le garder
 
 export default function Home() {
   const router = useRouter();
