@@ -49,10 +49,11 @@ export default function Navbar() {
   return (
     <nav
       className={`
-    fixed top-0 left-0 h-screen w-navbar-mobile
+    fixed top-0 left-0 h-[100dvh] w-navbar-mobile
     bg-background z-5
     flex flex-col items-center justify-between 
     shadow-md shadow-black/40 *:w-full
+    overflow-y-auto
 
     transition-transform duration-300 ease-in-out
     ${isOpen ? "translate-x-0" : "-translate-x-full"}

@@ -5,10 +5,22 @@ import Navbar from "@/components/Navbar";
 import BurgerBtn from "@/components/mensurations/buttons/BurgerBtn";
 import { useNavBarContext } from "@/contexts/NavBarContext";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 function Content({ children }) {
   const { isOpen, closeNavbar } = useNavBarContext();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
   return (
     <div className="relative h-screen flex flex-row justify-between">
       {isOpen && (
