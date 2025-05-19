@@ -13,6 +13,7 @@ function BurgerBtn({ className = "" }) {
         w-10 h-10 rounded-full shadow-md shadow-black/30 cursor-pointer 
         bg-background transition-colors duration-300
       `}
+      data-ignore-outside
     >
       {/* Menu icon */}
       <Menu
