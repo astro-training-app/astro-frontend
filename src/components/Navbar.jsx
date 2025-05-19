@@ -3,7 +3,7 @@
 import Link from "next/link";
 import LogoutButton from "./logoutButton";
 import { useAuth } from "@/contexts/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import NavBarLink from "./links/NavBarLink";
 import {
   House,
@@ -20,13 +20,37 @@ import { useNavBarContext } from "@/contexts/NavBarContext";
 
 export default function Navbar() {
   const { isAuthenticated } = useAuth();
-  const { isOpen } = useNavBarContext();
+  const { isOpen, closeNavBar } = useNavBarContext();
+  const navRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      console.log("Target is:", event.target);
+      console.log("Contains ? ", navRef.current?.contains(event.target));
+      if (
+        navRef.current &&
+        !navRef.current.contains(event.target) &&
+        !event.target.closest("[data-ignore-outside]")
+      ) {
+        closeNavBar();
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, closeNavBar]);
 
   return (
     <nav
       className={`
     fixed top-0 left-0 h-screen w-navbar-mobile
-    bg-background z-1
+    bg-background z-5
     flex flex-col items-center justify-between 
     shadow-md shadow-black/40 *:w-full
 
@@ -37,6 +61,7 @@ export default function Navbar() {
     md:w-navbar
 
   `}
+      ref={navRef}
     >
       <Link
         href="/"
