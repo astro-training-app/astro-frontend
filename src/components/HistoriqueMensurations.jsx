@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-export default function HistoriqueMensurations({ clientId, refresh, refreshNow }) {
+export default function HistoriqueMensurations({
+  clientId,
+  refresh,
+  refreshNow,
+}) {
   const [mensurations, setMensurations] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,8 +16,36 @@ export default function HistoriqueMensurations({ clientId, refresh, refreshNow }
         const res = await fetch(
           `http://localhost:3000/api/mensurations/client/${clientId}`
         );
-        const data = await res.json();
-        setMensurations(data);
+        let raw = await res.json();
+
+        // 🧠 1. Tri par date ASC
+        raw.sort((a, b) => new Date(a.date_mesure) - new Date(b.date_mesure));
+
+        // 🧠 2. Dernières valeurs connues
+        let last = {
+          poids: null,
+          taille: null,
+          tour_biceps: null,
+          tour_poitrine: null,
+          tour_taille: null,
+          tour_cuisse: null,
+        };
+
+        // 🧠 3. Remplissage des trous
+        const complet = raw.map((m) => {
+          const full = { ...m };
+
+          for (const key in last) {
+            if (m[key] != null && m[key] !== "") {
+              last[key] = m[key];
+            }
+            full[key] = last[key];
+          }
+
+          return full;
+        });
+
+        setMensurations(complet);
       } catch (err) {
         console.error("Erreur lors du chargement :", err);
       } finally {
@@ -22,7 +54,7 @@ export default function HistoriqueMensurations({ clientId, refresh, refreshNow }
     };
 
     fetchMensurations();
-  }, [clientId, refresh]); // ✅ ici on ajoute refresh
+  }, [clientId, refresh]);
 
   if (loading) return <p className="text-center">⏳ Chargement...</p>;
 
@@ -41,19 +73,17 @@ export default function HistoriqueMensurations({ clientId, refresh, refreshNow }
 
       if (!res.ok) throw new Error("Erreur suppression");
 
-      // Rafraîchir la liste automatiquement
       if (typeof refreshNow === "function") refreshNow();
     } catch (err) {
       console.error("Erreur :", err);
       alert("Impossible de supprimer cette mensuration.");
     }
   };
-  
 
   return (
     <ul className="space-y-4">
       {mensurations.map((m) => (
-        <li key={m.id} className="bg-gray-800 p-4 rounded-lg shadow">
+        <li key={m.id} className="bg-gray-800 p-4 rounded-lg shadow text-white">
           <p>
             <strong>📅 Date :</strong> {m.date_mesure}
           </p>
