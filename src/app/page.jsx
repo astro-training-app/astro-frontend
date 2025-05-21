@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Button from "@/components/mensurations/buttons/Button";
+import Button from "@/components/buttons/Button";
 import { useAuth } from "@/contexts/AuthContext";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 

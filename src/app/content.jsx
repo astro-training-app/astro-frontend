@@ -2,7 +2,7 @@
 import { ToastContainer } from "react-toastify";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import BurgerBtn from "@/components/mensurations/buttons/BurgerBtn";
+import BurgerBtn from "@/components/buttons/BurgerBtn";
 import { useNavBarContext } from "@/contexts/NavBarContext";
 
 import React, { useEffect } from "react";
@@ -21,11 +21,12 @@ function Content({ children }) {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
   return (
     <div className="relative h-screen flex flex-row justify-between">
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/30 z-1 md:hidden transition-opacity duration-300"
+          className="fixed opacity-100 inset-0 bg-black/30 z-1 md:hidden md:opacity-0 transition-opacity duration-300"
           onClick={closeNavbar}
         />
       )}
