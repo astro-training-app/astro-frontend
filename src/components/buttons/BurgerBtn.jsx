@@ -5,6 +5,10 @@ import { useNavBarContext } from "@/contexts/NavBarContext";
 function BurgerBtn({ className = "" }) {
   const { toggleNavBar, isOpen } = useNavBarContext();
 
+  if (isOpen) {
+    className += " translate-x-58";
+  }
+
   return (
     <button
       onClick={toggleNavBar}
@@ -12,6 +16,7 @@ function BurgerBtn({ className = "" }) {
         ${className} md:hidden z-50 flex justify-center items-center 
         w-10 h-10 rounded-full shadow-md shadow-black/30 cursor-pointer 
         bg-background transition-colors duration-300
+        transition-transform duration-350 
       `}
       data-ignore-outside
     >

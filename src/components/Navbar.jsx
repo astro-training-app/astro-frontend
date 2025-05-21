@@ -26,8 +26,6 @@ export default function Navbar() {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      console.log("Target is:", event.target);
-      console.log("Contains ? ", navRef.current?.contains(event.target));
       if (
         navRef.current &&
         !navRef.current.contains(event.target) &&
@@ -67,35 +65,44 @@ export default function Navbar() {
       <Link
         href="/"
         className="w-full text-xl text-primary font-bold center-left p-6"
+        onClick={closeNavBar}
       >
         FitCoach
       </Link>
       {/* Liens */}
       <div className="h-full flex flex-col flex-start text-sm sm:text-base p-4 border-t border-t-gray-500/40 *:h-12 *:mt-2 *:flex *:items-center">
-        <NavBarLink href="/" icon={<House />}>
+        <NavBarLink href="/" icon={<House />} callback={closeNavBar}>
           Home
         </NavBarLink>
         {isAuthenticated && (
-          <NavBarLink href="/clients" icon={<Users />}>
+          <NavBarLink href="/clients" icon={<Users />} callback={closeNavBar}>
             Clients
           </NavBarLink>
         )}
 
-        <NavBarLink href="/trouver-coach" icon={<Handshake />}>
+        <NavBarLink
+          href="/trouver-coach"
+          icon={<Handshake />}
+          callback={closeNavBar}
+        >
           Partners
         </NavBarLink>
         {isAuthenticated && (
-          <NavBarLink href="/profil" icon={<User />}>
+          <NavBarLink href="/profil" icon={<User />} callback={closeNavBar}>
             Profil
           </NavBarLink>
         )}
         {!isAuthenticated && (
-          <NavBarLink href="/login" icon={<LogIn />}>
+          <NavBarLink href="/login" icon={<LogIn />} callback={closeNavBar}>
             Login
           </NavBarLink>
         )}
         {!isAuthenticated && (
-          <NavBarLink href="/devenir-coach" icon={<UserPlus />}>
+          <NavBarLink
+            href="/devenir-coach"
+            icon={<UserPlus />}
+            callback={closeNavBar}
+          >
             Sign up
           </NavBarLink>
         )}

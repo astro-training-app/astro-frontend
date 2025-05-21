@@ -1,13 +1,19 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 
-function NavBarLink({ children, href, icon, onClick, variant = "primary" }) {
+function NavBarLink({
+  children,
+  href,
+  icon,
+  onClick,
+  callback,
+  variant = "primary",
+}) {
   const pathname = usePathname();
   const isActive = href === pathname;
+
   const primaryStyles = "text-secondary hover:bg-btn-hover";
   const primarySelectedStyle = "bg-blue-600/15 text-blue-600";
 
@@ -21,27 +27,31 @@ function NavBarLink({ children, href, icon, onClick, variant = "primary" }) {
   const content = (
     <>
       <div className="font-normal flex items-center gap-2">
-        {/* align icon center */}
         <span className="w-5 h-5 flex items-center">{icon}</span>
-
         {children}
       </div>
       {isActive && <ChevronRight className="w-4 h-4" />}
     </>
   );
 
+  const handleClick = (e) => {
+    if (callback) callback();
+    if (onClick) onClick(e);
+  };
+
   return onClick ? (
     <button
       className={`${styles} ${
         isActive ? selectedStyle : ""
       } flex items-center gap-2 px-4 py-2 rounded`}
-      onClick={onClick}
+      onClick={handleClick}
     >
       {content}
     </button>
   ) : (
     <Link
       href={href}
+      onClick={handleClick}
       className={`px-4 py-2 rounded flex justify-between ${
         isActive ? `${selectedStyle}` : `${styles}`
       }`}
