@@ -4,6 +4,7 @@
 :root {
   --primary: oklch(54.6% 0.245 262.881);
   --secondary: #333333;
+  --subtitle: rgb(160, 164, 168);
   --background: #fdfdfd;
   --btn-hover: #f3f4f6;
 }
@@ -11,6 +12,7 @@
 .dark {
   --primary: oklch(54.6% 0.245 262.881);
   --secondary: #d2d2d2;
+  --subtitle: rgb(160, 164, 168);
   --btn-hover: #1e1e1e;
   --background: #121212;
 }
@@ -19,6 +21,7 @@
   --color-primary: var(--primary);
   --color-btn-hover: var(--btn-hover);
   --color-secondary: var(--secondary);
+  --color-subtitle: var(--subtitle);
   --color-background: var(--background);
   --spacing-navbar: 25%;
   --spacing-navbar-mobile: 300px;

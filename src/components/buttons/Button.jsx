@@ -2,10 +2,10 @@
 
 export default function Button({ children, color = "blue", onClick }) {
   const baseStyles =
-    "text-white px-4 py-2 rounded hover:brightness-100 transition";
+    "px-6 py-4 rounded hover:brightness-100 transition cursor-pointer";
   const colorStyles = {
-    blue: "bg-blue-600",
-    green: "bg-green-600",
+    blue: "bg-primary text-gray-200",
+    emptyBlue: "bg-transparent border-1 border-primary text-primary",
     red: "bg-red-600",
     gray: "bg-gray-600",
   };

@@ -12,44 +12,45 @@ export default function Home() {
 
   return (
     <MotionLayoutWrapper>
-      <div className="flex flex-col items-center justify-center px-4 py-8 bg-background text-foreground">
-        {/* Titre principal */}
-        <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-center">
-          FitCoach 🦾
-        </h1>
+      <div className="flex h-[60vh] flex-initial">
+        <div className="flex flex-col items-start justify-center px-4 py-8 bg-background">
+          {/* Titre principal */}
 
-        {/* Description */}
-        <p className="text-lg sm:text-xl text-center max-w-xl mb-8">
-          Bienvenue sur FitCoach, l&apos;application pour suivre, gérer et
-          personnaliser les programmes sportifs entre coachs et clients.
-        </p>
+          <h1 className="text-7xl font-bold mb-6">
+            Transform Your Fitness Journey
+          </h1>
 
-        {/* Boutons */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <Button color="blue" onClick={() => router.push("/devenir-coach")}>
-            Devenir coach
-          </Button>
-          <Button color="green" onClick={() => router.push("/trouver-coach")}>
-            Trouver un coach
-          </Button>
-          <Button color="gray" onClick={() => router.push("/login")}>
-            S'identifier
-          </Button>
+          {/* Description */}
+          <p className="text-lg sm:text-xl text-subtitle max-w-xl mb-8">
+            Connect with expert coaches or build your coaching business with our
+            all-in-one platform.
+          </p>
+
+          {/* Boutons */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <Button color="blue" onClick={() => router.push("/devenir-coach")}>
+              Become a Coach
+            </Button>
+            <Button
+              color="emptyBlue"
+              onClick={() => router.push("/trouver-coach")}
+            >
+              Find a Coach
+            </Button>
+            <Button color="emptyBlue" onClick={() => router.push("/login")}>
+              Login
+            </Button>
+          </div>
+
+          {/* Illustration */}
         </div>
-
-        {/* Illustration */}
         <Image
-          src="/fit-image.svg"
+          src="/img/coach-homepage.jpg"
           alt="Sport illustration"
           width={256}
           height={256}
-          className="rounded shadow-lg"
+          className="rounded "
         />
-
-        {/* Test auth + toast */}
-        <p className="text-lg mt-4">
-          isAuthenticated : {isAuthenticated ? "✅ Connecté" : "❌ Déconnecté"}
-        </p>
       </div>
     </MotionLayoutWrapper>
   );
