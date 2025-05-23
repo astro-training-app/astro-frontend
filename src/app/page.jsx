@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <MotionLayoutWrapper>
-      <div className="flex h-[60vh] flex-initial">
+      <div className="flex h-[60vh] flex-initial items-center">
         <div className="flex flex-col items-start justify-center px-4 py-8 bg-background">
           {/* Titre principal */}
 
@@ -49,7 +49,7 @@ export default function Home() {
           alt="Sport illustration"
           width={256}
           height={256}
-          className="rounded "
+          className="rounded object-cover h-[50%] w-[80%] hidden lg:block"
         />
       </div>
     </MotionLayoutWrapper>
