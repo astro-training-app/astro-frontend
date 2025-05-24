@@ -34,16 +34,20 @@ export default function TrouverCoach() {
 
   return (
     <MotionLayoutWrapper>
-      <div className="max-w-3xl mx-auto mt-10 p-4">
-        <h2 className="text-3xl font-bold text-center mb-6">
-          Trouver un coach
-        </h2>
+      <div className="w-full max-w-5xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-[var(--background)] text-[var(--secondary)]">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold mb-2">Nos coachs</h2>
+          <p className="text-[var(--secondary)] max-w-2xl mx-auto text-sm sm:text-base">
+            Découvrez les coachs disponibles, leurs spécialités, leurs
+            approches, et contactez celui qui vous correspond.
+          </p>
+        </div>
 
         {/* Champ de recherche */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <label
             htmlFor="search"
-            className="block text-sm font-medium text-white mb-1"
+            className="block text-sm sm:text-base font-medium text-[var(--secondary)] mb-1"
           >
             Rechercher un coach :
           </label>
@@ -53,12 +57,12 @@ export default function TrouverCoach() {
             placeholder="Nom, spécialité..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-md px-4 py-2 bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-600"
+            className="w-full rounded-md px-4 py-2 text-sm sm:text-base bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-600"
           />
         </div>
 
         {/* Liste des coachs */}
-        <ul className="space-y-6">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
           {coachs
             .filter(
               (item) =>
