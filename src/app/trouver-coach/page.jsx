@@ -2,14 +2,27 @@
 
 import CoachCard from "@/components/CoachCard";
 import { useState } from "react";
-import useProtectedRoute from "@/hooks/useProtectedRoute"; // le chemin pour authentification //
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
+import { motion } from "framer-motion";
+
+// Animation container pour le ul
+const container = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+// Animation de chaque carte coach
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function TrouverCoach() {
   const [search, setSearch] = useState("");
-  // const checking = useProtectedRoute();
-
-  // if (checking) return <p className="text-white p-10">Chargement...</p>; // bon la cela doit pas se voir en fait //
 
   const coachs = [
     {
@@ -61,8 +74,13 @@ export default function TrouverCoach() {
           />
         </div>
 
-        {/* Liste des coachs */}
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+        {/* Liste animée des coachs */}
+        <motion.ul
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center"
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
           {coachs
             .filter(
               (item) =>
@@ -71,14 +89,11 @@ export default function TrouverCoach() {
                 item.email.toLowerCase().includes(search.toLowerCase())
             )
             .map((item) => (
-              <CoachCard
-                key={item.id}
-                nom={item.nom}
-                bio={item.bio}
-                email={item.email}
-              />
+              <motion.li key={item.id} variants={fadeUp} className="w-full">
+                <CoachCard nom={item.nom} bio={item.bio} email={item.email} />
+              </motion.li>
             ))}
-        </ul>
+        </motion.ul>
       </div>
     </MotionLayoutWrapper>
   );

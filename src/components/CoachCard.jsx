@@ -1,6 +1,7 @@
 "use client";
 
-import { User2 } from "lucide-react";
+import { User2, ExternalLink } from "lucide-react";
+
 
 export default function CoachCard({ nom, bio, email }) {
   return (
@@ -19,12 +20,15 @@ export default function CoachCard({ nom, bio, email }) {
         <h3 className="text-xl sm:text-2xl font-bold">{nom}</h3>
         <p className="text-sm mt-1">{bio}</p>
         <p className="text-xs italic mt-2">{email}</p>
-        <button
-          className="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2
-          rounded-lg transition font-semibold"
+        <a
+          href="https://http.cat/404"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-block text-[var(--primary)] hover:underline text-sm font-semibold"
         >
-          Contacter
-        </button>
+          Voir le profil{" "}
+          <ExternalLink className="inline w-4 h-4 ml-1 text-[var(--primary)]" />
+        </a>
       </div>
     </li>
   );
