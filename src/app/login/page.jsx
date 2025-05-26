@@ -46,9 +46,9 @@ export default function Login() {
 
   return (
     <MotionLayoutWrapper>
-      <div className="min-h-screen bg-gray-900 text-gray-900 flex items-center justify-center">
-        <div className="bg-gray-200 p-8 rounded-lg shadow-md w-full max-w-md">
-          <h1 className="text-3xl font-bold mb-6 text-center">Connexion</h1>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="p-8 rounded-lg shadow-md w-full max-w-md">
+          <h1 className="text-3xl font-bold mb-6 text-center">Welcome back</h1>
           <form onSubmit={verification} className="space-y-4">
             <div>
               <label className="block mb-1">Email</label>
@@ -58,7 +58,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Votre email"
                 required
-                className="w-full px-4 py-2 rounded bg-gray-100  text-gray-900 border border-gray-300"
+                className="w-full px-4 py-2 rounded border border-gray-300"
               />
             </div>
             <div>
@@ -69,12 +69,12 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Votre mot de passe"
                 required
-                className="w-full px-4 py-2 rounded bg-gray-100 text-gray-900 border border-gray-300"
+                className="w-full px-4 py-2 rounded text-secondary border border-gray-100"
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded"
+              className="w-full bg-primary text-white font-semibold py-2 px-4 rounded"
             >
               Se connecter
             </button>
