@@ -4,7 +4,7 @@
 :root {
   --primary: oklch(54.6% 0.245 262.881);
   --secondary: #333333;
-  --subtitle: rgb(158, 158, 158);
+  --subtitle: rgb(160, 164, 168);
   --background: #fdfdfd;
   --btn-hover: #f3f4f6;
 }

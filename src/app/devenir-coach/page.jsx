@@ -46,43 +46,43 @@ export default function DevenirCoach() {
 
   return (
     <MotionLayoutWrapper>
-      <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-          Créer un compte Coach
+      <div className="max-w-md mx-auto mt-10 bg-background p-6 rounded shadow">
+        <h2 className="text-3xl font-bold text-center mb-6 text-secondary">
+          Create Your Account
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block mb-1 font-medium text-gray-800">Nom</label>
+            <label className="block mb-1 text-sm font-bold">Nom</label>
             <input
               type="text"
               value={nom}
               onChange={(e) => setNom(e.target.value)}
-              className="w-full bg-gray-100 border border-gray-500 px-3 py-2 rounded text-gray-800"
+              className="w-full border border-subtitle px-3 py-2 rounded"
               placeholder="John Doe"
               required
             />
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-800">Email</label>
+            <label className="block mb-1 text-sm font-bold">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-gray-100 border border-gray-500 px-3 py-2 rounded text-gray-800"
+              className="w-full border border-subtitle px-3 py-2 rounded text-secondary"
               placeholder="john@example.com"
               required
             />
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-gray-800">Mot de passe</label>
+            <label className="block mb-1 text-sm font-bold">Mot de passe</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-gray-100 border border-gray-500 px-3 py-2 rounded text-gray-800"
+              className="w-full border border-subtitle px-3 py-2 rounded text-secondary"
               placeholder="*********"
               required
             />
@@ -90,7 +90,7 @@ export default function DevenirCoach() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+            className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-blue-700 transition"
           >
             Créer un compte coach
           </button>
