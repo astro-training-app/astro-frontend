@@ -5,11 +5,7 @@ import { User2, ExternalLink } from "lucide-react";
 
 export default function CoachCard({ nom, bio, email }) {
   return (
-    <li
-      className="bg-[var(--background)] border border-gray-400 text-[var(--secondary)]
-      p-6 rounded-xl shadow-lg flex flex-col sm:flex-row items-center sm:items-start
-      gap-4 hover:shadow-xl transition text-center sm:text-left"
-    >
+    <li className="max-w-sm w-full bg-[var(--background)] border border-gray-400 text-[var(--secondary)] p-6 rounded-xl shadow-lg flex flex-col sm:flex-row items-center sm:items-start gap-4 hover:shadow-xl transition text-center sm:text-left">
       {/* Icône centrée */}
       <div className="bg-green-700 p-3 rounded-full">
         <User2 className="text-white w-6 h-6" />

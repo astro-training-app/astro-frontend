@@ -76,7 +76,7 @@ export default function TrouverCoach() {
 
         {/* Liste animée des coachs */}
         <motion.ul
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center"
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center"
           variants={container}
           initial="hidden"
           animate="visible"
@@ -89,7 +89,11 @@ export default function TrouverCoach() {
                 item.email.toLowerCase().includes(search.toLowerCase())
             )
             .map((item) => (
-              <motion.li key={item.id} variants={fadeUp} className="w-full">
+              <motion.li
+                key={item.id}
+                variants={fadeUp}
+                className="flex justify-center"
+              >
                 <CoachCard nom={item.nom} bio={item.bio} email={item.email} />
               </motion.li>
             ))}
