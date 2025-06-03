@@ -58,7 +58,7 @@ export default function DevenirCoach() {
               type="text"
               value={nom}
               onChange={(e) => setNom(e.target.value)}
-              className="w-full border border-subtitle px-3 py-2 rounded"
+              className="w-full border border-subtitle px-3 py-2 rounded focus:outline-primary"
               placeholder="John Doe"
               required
             />
@@ -70,7 +70,7 @@ export default function DevenirCoach() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-subtitle px-3 py-2 rounded text-secondary"
+              className="w-full border border-subtitle px-3 py-2 rounded text-secondary focus:outline-primary"
               placeholder="john@example.com"
               required
             />
@@ -82,7 +82,7 @@ export default function DevenirCoach() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-subtitle px-3 py-2 rounded text-secondary"
+              className="w-full border border-subtitle px-3 py-2 rounded text-secondary focus:outline-primary"
               placeholder="*********"
               required
             />
@@ -90,7 +90,7 @@ export default function DevenirCoach() {
 
           <button
             type="submit"
-            className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+            className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-button-hover-bg transition focus:outline-primary"
           >
             Créer un compte coach
           </button>
