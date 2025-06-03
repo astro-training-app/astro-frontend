@@ -26,14 +26,14 @@ export default function TrouverCoach() {
   const [coachs, setCoachs] = useState([]); // Coachs récupérés
   const [filtered, setFiltered] = useState([]); // Coachs filtrés
 
-  // 🔁 Récupère tous les coachs au chargement
+  // je recup les coachs au chargement de la page
   useEffect(() => {
     const fetchCoachs = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/coaches");
         const data = await res.json();
         setCoachs(data);
-        setFiltered(data); // initialise la liste filtrée
+        setFiltered(data);
       } catch (err) {
         console.error("Erreur lors du fetch des coachs :", err);
       }
@@ -42,7 +42,7 @@ export default function TrouverCoach() {
     fetchCoachs();
   }, []);
 
-  // 🔎 Filtrage dynamique quand on tape
+  // Filtrage quand on tape dmais avec la despcription en moins
   useEffect(() => {
     const resultats = coachs.filter((coach) => {
       const nom = coach.nom?.toLowerCase() || "";
@@ -57,7 +57,7 @@ export default function TrouverCoach() {
 
   return (
     <MotionLayoutWrapper>
-      <div className="w-full max-w-5xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-background text-secondary">
+      <div className="w-full max-w-6xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-background text-secondary">
         <div className="mb-10">
           <h2 className="text-7xl font-bold mb-4">Nos coachs</h2>
           <p className="text-subtitle max-w-2xl sm:text-xl text-lg">
@@ -84,9 +84,9 @@ export default function TrouverCoach() {
           />
         </div>
 
-        {/* 📋 Liste animée des coachs filtrés */}
+        {/* Liste animée des coachs filtrés */}
         <motion.ul
-          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center"
+          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 items-center"
           variants={container}
           initial="hidden"
           animate="visible"

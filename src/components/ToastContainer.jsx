@@ -14,6 +14,7 @@ export default function ToastProvider() {
       pauseOnHover
       theme="dark"
       style={{ top: "66%" }} // Positionné aux deux tiers de l'écran
+      progressClassName="toast-progress-blue"
     />
   );
 }

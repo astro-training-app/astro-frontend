@@ -35,3 +35,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
 }
+
+.toast-progress-blue {
+  background: #2563eb !important; 
+}
