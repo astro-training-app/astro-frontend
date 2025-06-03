@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useAuth } from "@/contexts/AuthContext";
-import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
+import { toast } from "react-toastify";
 
 const url = "http://localhost:3000/api";
 
@@ -35,10 +35,7 @@ export default function Login() {
     if (res.ok) {
       Cookies.set("token", data.token, { expires: cookieTimer });
       setIsAuthenticated(true);
-      toast.success("Connexion réussie !");
-      setTimeout(() => {
-        router.push("/profil");
-      }, 2000);
+      router.push("/");
     } else {
       toast.error("Email ou mot de passe incorrect");
     }
@@ -79,8 +76,6 @@ export default function Login() {
               Se connecter
             </button>
           </form>
-
-          {message && <p className="mt-4 text-center">{message}</p>}
         </div>
       </div>
     </MotionLayoutWrapper>
