@@ -58,7 +58,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Votre email"
                 required
-                className="w-full px-4 py-2 rounded border border-gray-300"
+                className="w-full px-4 py-2 rounded text-secondary border border-subtitle focus:outline-primary"
               />
             </div>
             <div>
@@ -69,12 +69,12 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Votre mot de passe"
                 required
-                className="w-full px-4 py-2 rounded text-secondary border border-gray-100"
+                className="w-full px-4 py-2 rounded text-secondary border border-subtitle focus:outline-primary"
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-primary text-white font-semibold py-2 px-4 rounded"
+              className="w-full bg-primary text-white font-semibold py-2 px-4 rounded cursor-pointer hover:bg-button-hover-bg transition duration-300 ease-in-out"
             >
               Se connecter
             </button>

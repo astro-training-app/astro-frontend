@@ -2,7 +2,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --primary: oklch(54.6% 0.245 262.881);
   --secondary: #333333;
   --subtitle: rgb(158, 158, 158);
   --background: #fdfdfd;
@@ -10,7 +9,6 @@
 }
 
 .dark {
-  --primary: oklch(54.6% 0.245 262.881);
   --secondary: #d2d2d2;
   --subtitle: rgb(160, 164, 168);
   --btn-hover: #1e1e1e;
@@ -18,11 +16,12 @@
 }
 
 @theme {
-  --color-primary: var(--primary);
+  --color-primary: oklch(54.6% 0.245 262.881);
   --color-btn-hover: var(--btn-hover);
   --color-secondary: var(--secondary);
   --color-subtitle: var(--subtitle);
   --color-background: var(--background);
+  --color-button-hover-bg: oklch(50% 0.245 262.881);
   --spacing-navbar: 25%;
   --spacing-navbar-mobile: 300px;
 }
