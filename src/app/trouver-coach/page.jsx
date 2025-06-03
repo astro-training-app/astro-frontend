@@ -1,11 +1,11 @@
 "use client";
 
 import CoachCard from "@/components/CoachCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 import { motion } from "framer-motion";
 
-// Animation container pour le ul
+// Animation container pour la liste
 const container = {
   hidden: {},
   visible: {
@@ -15,88 +15,91 @@ const container = {
   },
 };
 
-// Animation de chaque carte coach
+// Animation des éléments
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
 
 export default function TrouverCoach() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(""); // Recherche texte
+  const [coachs, setCoachs] = useState([]); // Coachs récupérés
+  const [filtered, setFiltered] = useState([]); // Coachs filtrés
 
-  const coachs = [
-    {
-      id: 1,
-      nom: "Jean Dupont",
-      email: "jean.dupont@fitcoach.com",
-      bio: "Coach certifié, spécialisé en musculation.",
-    },
-    {
-      id: 2,
-      nom: "Claire Martin",
-      email: "claire.martin@fitcoach.com",
-      bio: "Coach forme et bien-être, yoga et pilates.",
-    },
-    {
-      id: 3,
-      nom: "Ahmed Ben",
-      email: "ahmed.ben@fitcoach.com",
-      bio: "Coach sportif à domicile, nutrition et cardio.",
-    },
-  ];
+  // 🔁 Récupère tous les coachs au chargement
+  useEffect(() => {
+    const fetchCoachs = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/coaches");
+        const data = await res.json();
+        setCoachs(data);
+        setFiltered(data); // initialise la liste filtrée
+      } catch (err) {
+        console.error("Erreur lors du fetch des coachs :", err);
+      }
+    };
+
+    fetchCoachs();
+  }, []);
+
+  // 🔎 Filtrage dynamique quand on tape
+  useEffect(() => {
+    const resultats = coachs.filter((coach) => {
+      const nom = coach.nom?.toLowerCase() || "";
+      const email = coach.email?.toLowerCase() || "";
+      const recherche = search.toLowerCase();
+
+      return nom.includes(recherche) || email.includes(recherche);
+    });
+
+    setFiltered(resultats);
+  }, [search, coachs]);
 
   return (
     <MotionLayoutWrapper>
-      <div className="w-full max-w-5xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-[var(--background)] text-[var(--secondary)]">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-2">Nos coachs</h2>
-          <p className="text-[var(--secondary)] max-w-2xl mx-auto text-sm sm:text-base">
-            Découvrez les coachs disponibles, leurs spécialités, leurs
-            approches, et contactez celui qui vous correspond.
+      <div className="w-full max-w-5xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-background text-secondary">
+        <div className="mb-10">
+          <h2 className="text-7xl font-bold mb-4">Nos coachs</h2>
+          <p className="text-subtitle max-w-2xl sm:text-xl text-lg">
+            Découvrez les coachs disponibles, et contactez celui qui vous
+            correspond.
           </p>
         </div>
 
-        {/* Champ de recherche */}
+        {/* 🔍 Barre de recherche */}
         <div className="mb-4 sm:mb-6">
           <label
             htmlFor="search"
-            className="block text-sm sm:text-base font-medium text-[var(--secondary)] mb-1"
+            className="block text-sm sm:text-base font-medium text-secondary mb-1"
           >
             Rechercher un coach :
           </label>
           <input
             type="text"
             id="search"
-            placeholder="Nom, spécialité..."
+            placeholder="Nom ou email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-md px-4 py-2 text-sm sm:text-base bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-600"
+            className="w-full rounded-md px-4 py-2 text-sm sm:text-base text-secondary border border-subtitle focus:outline-primary"
           />
         </div>
 
-        {/* Liste animée des coachs */}
+        {/* 📋 Liste animée des coachs filtrés */}
         <motion.ul
           className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center"
           variants={container}
           initial="hidden"
           animate="visible"
         >
-          {coachs
-            .filter(
-              (item) =>
-                item.nom.toLowerCase().includes(search.toLowerCase()) ||
-                item.bio.toLowerCase().includes(search.toLowerCase()) ||
-                item.email.toLowerCase().includes(search.toLowerCase())
-            )
-            .map((item) => (
-              <motion.li
-                key={item.id}
-                variants={fadeUp}
-                className="flex justify-center"
-              >
-                <CoachCard nom={item.nom} bio={item.bio} email={item.email} />
-              </motion.li>
-            ))}
+          {filtered.map((coach) => (
+            <motion.li
+              key={coach.id}
+              variants={fadeUp}
+              className="flex justify-center"
+            >
+              <CoachCard nom={coach.nom} email={coach.email} />
+            </motion.li>
+          ))}
         </motion.ul>
       </div>
     </MotionLayoutWrapper>
