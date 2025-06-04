@@ -96,7 +96,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
     <>
       <form
         onSubmit={handleSubmit}
-        className="space-y-4 p-6 bg-gray-800 rounded-xl text-white max-w-md mx-auto"
+        className="space-y-4 p-6 dark:bg-black border rounded-xl dark:text-white max-w-md mx-auto"
       >
         <h2 className="text-2xl font-bold">Ajouter une mensuration</h2>
 

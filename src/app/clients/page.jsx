@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import ClientCard from "@/components/clients/ClientCard";
+import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 
 export default function ClientList() {
   const [clients, setClients] = useState([]);
@@ -56,24 +57,23 @@ export default function ClientList() {
       <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Chargement...</p>
     );
 
-  const [refresh, setRefresh] = useState(0);
-
-  const handleRefresh = () => {
-    setRefresh((r) => r + 1);
-  };
-
   return (
-    <div className="p-5">
-      <h1 className="text-xl font-bold mb-4">Liste des clients</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-5">
-        {clients.map((client) => (
-          <ClientCard
-            key={client.id}
-            client={client}
-            onDelete={handleDeleteClient}
-          />
-        ))}
-      </div>
-    </div>
+    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white p-10">
+      <MotionLayoutWrapper>
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          Liste des clients
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {clients.map((client) => (
+            <ClientCard
+              key={client.id}
+              client={client}
+              onDelete={handleDeleteClient}
+            />
+          ))}
+        </div>
+      </MotionLayoutWrapper>
+    </main>
   );
 }

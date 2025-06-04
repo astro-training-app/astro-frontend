@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import {
   LineChart,
   Line,
@@ -15,6 +16,8 @@ import {
 export default function GraphiqueMensurations({ clientId, refresh }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { theme } = useTheme(); // ✅ récupération du thème
+  const strokeColor = theme === "dark" ? "#ffffff" : "#000000"; // ✅ stroke dynamique
 
   const [courbesActives, setCourbesActives] = useState({
     poids: true,
@@ -49,12 +52,11 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
         const res = await fetch(
           `http://localhost:3000/api/mensurations/client/${clientId}`
         );
-        let raw = await res.json();
+        const raw = await res.json();
 
-        // Tri des données par date
+        // Tri des dates
         raw.sort((a, b) => new Date(a.date_mesure) - new Date(b.date_mesure));
 
-        // Valeurs persistantes : on garde la dernière connue si manquante
         let last = {
           poids: null,
           taille: null,
@@ -65,17 +67,13 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
         };
 
         const complet = raw.map((m) => {
-          const line = {
-            date: m.date_mesure,
-          };
-
+          const line = { date: m.date_mesure };
           for (const key in last) {
             if (m[key] != null && m[key] !== "") {
               last[key] = m[key];
             }
             line[key] = last[key];
           }
-
           return line;
         });
 
@@ -98,13 +96,11 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
     return <p className="text-white text-center">Aucune donnée à afficher.</p>;
 
   return (
-    <div className="bg-gray-800 p-6 rounded-xl shadow">
-      <h3 className="text-xl font-bold mb-4 text-white">
-        Évolution des mensurations
-      </h3>
+    <div className="bg-white text-black dark:bg-background dark:text-white border p-6 rounded-xl shadow">
+      <h3 className="text-xl font-bold mb-4">Évolution des mensurations</h3>
 
-      {/* 🟩 Filtres dynamiques */}
-      <div className="mb-6 flex flex-wrap gap-4 text-white text-sm">
+      {/* 🟦 Filtres dynamiques */}
+      <div className="mb-6 flex flex-wrap gap-4 text-sm">
         {Object.keys(courbesActives).map((key) => (
           <label key={key} className="flex items-center gap-1">
             <input
@@ -122,15 +118,15 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
         ))}
       </div>
 
+      {/* 🟨 Graphique */}
       <ResponsiveContainer width="100%" height={350}>
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" stroke="#fff" />
-          <YAxis stroke="#fff" />
+          <CartesianGrid stroke={strokeColor} strokeDasharray="3 3" />
+          <XAxis dataKey="date" stroke={strokeColor} />
+          <YAxis stroke={strokeColor} />
           <Tooltip />
           <Legend />
 
-          {/* Lignes activées uniquement */}
           {Object.entries(courbesActives).map(
             ([key, active]) =>
               active && (

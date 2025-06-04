@@ -7,7 +7,7 @@ export default function ClientCard({ client, onDelete }) {
 
   return (
     <Link href={`/clients/${client.id}/mensuration`} className="block group">
-      <div className="bg-white dark:bg-zinc-800 rounded-2xl shadow p-6 w-full max-w-md group-hover:shadow-lg transition">
+      <div className="bg-white dark:bg-background dark:border rounded-2xl shadow p-6 w-full max-w-md group-hover:shadow-lg transition">
         <div className="flex items-center space-x-4">
           <div className="w-16 h-16 rounded-full bg-gray-300 dark:bg-zinc-600 flex items-center justify-center text-xl font-bold text-white">
             {photo ? (

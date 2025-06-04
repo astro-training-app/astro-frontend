@@ -83,7 +83,10 @@ export default function HistoriqueMensurations({
   return (
     <ul className="space-y-4">
       {mensurations.map((m) => (
-        <li key={m.id} className="bg-gray-800 p-4 rounded-lg shadow text-white">
+        <li
+          key={m.id}
+          className="bg-white dark:bg-background p-4 dark:border border rounded shadow text-black dark:text-white"
+        >
           <p>
             <strong>📅 Date :</strong> {m.date_mesure}
           </p>

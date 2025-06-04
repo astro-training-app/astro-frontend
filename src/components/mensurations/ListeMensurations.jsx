@@ -46,7 +46,7 @@ export default function ListeMensurations() {
       {mensuration.map((item) => (
         <div
           key={item.id}
-          className="bg-gray-700 rounded-lg p-4 shadow-md border border-gray-600"
+          className="dark:bg-background rounded-lg p-4 shadow-md border bg-white"
         >
           <p className="text-lg font-semibold mb-2">📅 {item.date_mesure}</p>
           <p>⚖️ Poids : {item.poids} kg</p>
