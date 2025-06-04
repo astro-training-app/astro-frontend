@@ -56,6 +56,12 @@ export default function ClientList() {
       <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Chargement...</p>
     );
 
+  const [refresh, setRefresh] = useState(0);
+
+  const handleRefresh = () => {
+    setRefresh((r) => r + 1);
+  };
+
   return (
     <div className="p-5">
       <h1 className="text-xl font-bold mb-4">Liste des clients</h1>

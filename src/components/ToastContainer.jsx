@@ -6,15 +6,14 @@ import "react-toastify/dist/ReactToastify.css";
 export default function ToastProvider() {
   return (
     <ToastContainer
-      position="top-right"
+      position="top-center"
       autoClose={3000}
       hideProgressBar={false}
       newestOnTop
       closeOnClick
       pauseOnHover
-      theme="dark"
-      style={{ top: "66%" }} // Positionné aux deux tiers de l'écran
-      progressClassName="toast-progress-blue"
+      toastClassName="bg-background text-secondary border border-subtitle shadow-lg"
+      progressClassName="bg-[var(--primary)]"
     />
   );
 }

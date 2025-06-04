@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const url = "http://localhost:3000/api";
 
@@ -78,6 +79,7 @@ export default function Login() {
           </form>
         </div>
       </div>
+      {setIsAuthenticated && <ToastContainer />}
     </MotionLayoutWrapper>
   );
 }
