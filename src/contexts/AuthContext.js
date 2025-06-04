@@ -2,8 +2,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
+
+import toast from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -14,8 +14,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = Cookies.get("token");
     setIsAuthenticated(!!token);
+  }, []);
+
+  useEffect(() => {
     if (isAuthenticated) {
-      <ToastContainer />;
+      toast.success("Connection succesful !");
     }
   }, [isAuthenticated]);
 

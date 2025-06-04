@@ -1,5 +1,4 @@
 "use client";
-import { ToastContainer } from "react-toastify";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import BurgerBtn from "@/components/buttons/BurgerBtn";
@@ -36,7 +35,6 @@ function Content({ children }) {
 
       <div className="md:ml-navbar flex flex-col h-full w-full overflow-y-auto">
         <main className="p-4 w-full">{children}</main>
-        <ToastContainer position="top-center" autoClose={3000} />
         <Footer />
       </div>
     </div>
