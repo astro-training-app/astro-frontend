@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 
-export default function Profil() {
+export default function Profile() {
   const { isAuthenticated } = useAuth();
   const checking = useProtectedRoute();
   const router = useRouter();

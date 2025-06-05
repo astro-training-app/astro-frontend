@@ -88,8 +88,8 @@ export default function Navbar() {
           Partners
         </NavBarLink>
         {isAuthenticated && (
-          <NavBarLink href="/profil" icon={<User />} callback={closeNavBar}>
-            Profil
+          <NavBarLink href="/profile" icon={<User />} callback={closeNavBar}>
+            Profile
           </NavBarLink>
         )}
         {!isAuthenticated && (
