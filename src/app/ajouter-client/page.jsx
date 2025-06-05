@@ -9,7 +9,7 @@ export default function PageAjouterClient() {
   if (checking) return null;
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white py-10">
+    <main className="min-h-screen dark:bg-background dark:text-white py-10">
       <h1 className="text-3xl font-bold text-center mb-6">Ajouter un client</h1>
       <ClientForm />
     </main>

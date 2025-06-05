@@ -32,8 +32,9 @@ export default function TrouverCoach() {
       try {
         const res = await fetch("http://localhost:3000/api/coaches");
         const data = await res.json();
-        setCoachs(data);
-        setFiltered(data);
+        setCoachs(data.data);
+        setFiltered(data.data);
+        console.log("data reçue :", data);
       } catch (err) {
         console.error("Erreur lors du fetch des coachs :", err);
       }
