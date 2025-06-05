@@ -12,11 +12,11 @@ export default function Home() {
 
   return (
     <MotionLayoutWrapper>
-      <div className="flex h-[60vh] flex-initial items-center">
-        <div className="flex flex-col items-start justify-center px-4 py-8 bg-background">
+      <div className="flex flex-col-reverse lg:flex-row items-center lg:h-[60vh]">
+        <div className="flex flex-col items-center lg:items-start justify-center px-4 py-8 bg-background text-center lg:text-left">
           {/* Titre principal */}
 
-          <h1 className="text-7xl font-bold mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 text-center lg:text-left">
             Transform Your Fitness Journey
           </h1>
 
@@ -27,7 +27,7 @@ export default function Home() {
           </p>
 
           {/* Boutons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
             <Button color="blue" onClick={() => router.push("/devenir-coach")}>
               Become a Coach
             </Button>
@@ -49,7 +49,7 @@ export default function Home() {
           alt="Sport illustration"
           width={256}
           height={256}
-          className="rounded object-cover h-[50%] w-[80%] hidden lg:block"
+          className="rounded object-cover w-full max-w-sm mx-auto hidden lg:block"
         />
       </div>
     </MotionLayoutWrapper>
