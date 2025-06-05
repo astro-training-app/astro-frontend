@@ -10,7 +10,7 @@ const container = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.5,
     },
   },
 };
@@ -86,7 +86,7 @@ export default function TrouverCoach() {
 
         {/* Liste animée des coachs filtrés */}
         <motion.ul
-          className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 items-center"
+          className="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-6 sm:gap-8 justify-center"
           variants={container}
           initial="hidden"
           animate="visible"
@@ -95,7 +95,7 @@ export default function TrouverCoach() {
             <motion.li
               key={coach.id}
               variants={fadeUp}
-              className="flex justify-center"
+              className="w-full flex justify-center"
             >
               <CoachCard nom={coach.nom} email={coach.email} />
             </motion.li>
