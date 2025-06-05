@@ -155,12 +155,12 @@ export default function ClientForm() {
         type="file"
         name="photo"
         onChange={handleChange}
-        className="input-style"
+        className="input-style hover:cursor-pointer gap-4 underline"
       />
 
       <button
         type="submit"
-        className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+        className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-white"
       >
         Envoyer
       </button>
