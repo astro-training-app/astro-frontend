@@ -4,8 +4,7 @@ import Cookies from "js-cookie";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
-import { toast } from "react-toastify";
-import { ToastContainer } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const url = "http://localhost:3000/api";
 
@@ -38,7 +37,7 @@ export default function Login() {
       setIsAuthenticated(true);
       router.push("/");
     } else {
-      toast.error("Email ou mot de passe incorrect");
+      toast.error(data.message);
     }
   };
 
@@ -79,7 +78,6 @@ export default function Login() {
           </form>
         </div>
       </div>
-      {setIsAuthenticated && <ToastContainer />}
     </MotionLayoutWrapper>
   );
 }

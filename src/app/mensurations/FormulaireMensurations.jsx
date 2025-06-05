@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function FormulaireMensurations({ clientId, onNewMensuration }) {
   const [formData, setFormData] = useState({
@@ -72,8 +72,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
       const result = await response.json();
 
       if (!response.ok) throw new Error(result.message);
-
-      toast.success("✅ Mensuration enregistrée !");
+      toast.success("Mensuration successfully added.");
       setFormData({
         date_mesure: "",
         poids: "",
@@ -88,7 +87,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
       setMensurations((prev) => [...prev, result]);
     } catch (err) {
       console.error("❌ Erreur :", err);
-      toast.error("❌ Une erreur est survenue.");
+      toast.error("An error occurred.");
     }
   }
 

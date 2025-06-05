@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
+import { useRooter } from "next/navigation";
 
 const url = "http://localhost:3000/api";
 
@@ -32,13 +33,13 @@ export default function DevenirCoach() {
       setMessage(data.message);
 
       if (res.ok) {
-        toast.success("🎉 Compte coach créé avec succès !");
+        toast.success("Account successfully created.");
       } else {
-        toast.error("❌ Erreur à la création du compte.");
+        toast.error(data.message);
       }
     } catch (err) {
       console.error(err);
-      toast.error("⚠️ Problème réseau ou serveur !");
+      toast.error("An error occurred.");
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +96,6 @@ export default function DevenirCoach() {
             Créer un compte coach
           </button>
         </form>
-        <p>{message}</p>
       </div>
     </MotionLayoutWrapper>
   );
