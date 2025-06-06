@@ -14,7 +14,6 @@ export default function ClientForm() {
     photo: null,
   });
 
-  // Pour forcer la remise à zéro du champ fichier
   const [fileKey, setFileKey] = useState(Date.now());
 
   function handleChange(e) {
@@ -44,7 +43,7 @@ export default function ClientForm() {
           age: parseInt(formData.age),
           sexe: formData.sexe,
           objectif: formData.objectif,
-          photo: "", // Champ temporaire, géré plus tard
+          photo: "",
         }),
       });
 
@@ -52,10 +51,7 @@ export default function ClientForm() {
       if (!response.ok) {
         throw new Error(result.message);
       } else {
-        console.log("✅ Client créé :", result);
         toast.success("Client créé !");
-
-        // Reset du formulaire
         setFormData({
           nom: "",
           prenom: "",
@@ -65,22 +61,16 @@ export default function ClientForm() {
           objectif: "",
           photo: null,
         });
-
-        // Réinitialiser le champ file visuellement
         setFileKey(Date.now());
       }
     } catch (err) {
-      console.error("❌ Erreur envoi client :", err);
       toast.error("Erreur lors de la création du client.");
     }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 p-6 dark:bg-background border rounded-xl dark:text-white max-w-md mx-auto"
-    >
-      <h2 className="text-2xl font-bold">Ajouter un client</h2>
+    <form onSubmit={handleSubmit} className="form-card">
+      <h2 className="form-title">Ajouter un client</h2>
 
       <input
         type="text"
@@ -158,10 +148,7 @@ export default function ClientForm() {
         className="input-style hover:cursor-pointer gap-4 underline"
       />
 
-      <button
-        type="submit"
-        className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-white"
-      >
+      <button type="submit" className="btn-primary">
         Envoyer
       </button>
     </form>
