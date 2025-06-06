@@ -55,7 +55,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Votre email"
                 required
-                className="w-full px-4 py-2 rounded text-secondary border border-subtitle focus:outline-primary"
+                className="input-style"
               />
             </div>
             <div>
@@ -66,7 +66,7 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Votre mot de passe"
                 required
-                className="w-full px-4 py-2 rounded text-secondary border border-subtitle focus:outline-primary"
+                className="input-style"
               />
             </div>
             <button

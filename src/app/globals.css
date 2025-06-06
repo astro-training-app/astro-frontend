@@ -35,19 +35,23 @@ body {
   font-size: 16px;
 }
 
+/* Champ input et select : style boîte partout */
 .input-style {
   width: 100%;
   background: transparent;
-  border: 0;
-  border-bottom: 2px solid #2563eb; /* bleu Tailwind-500 */
   color: var(--secondary);
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  transition: border-color 0.2s;
+  border: 1.5px solid #2563eb; /* bleu Tailwind-500 */
+  border-radius: 0.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
 }
 .input-style:focus {
-  border-bottom-color: #1d4ed8; /* bleu Tailwind-700 */
+  border-color: #1d4ed8; /* bleu Tailwind-700 */
+  outline: 2px solid #2563eb;
+  outline-offset: 0px;
+  box-shadow: 0 2px 8px 0 rgba(37, 99, 235, 0.1);
 }
 .input-style::placeholder {
   color: var(--subtitle);
