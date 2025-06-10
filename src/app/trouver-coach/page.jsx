@@ -30,11 +30,10 @@ export default function TrouverCoach() {
   useEffect(() => {
     const fetchCoachs = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/coaches");
+        const res = await fetch("http://localhost:3000/api/coaches/all");
         const data = await res.json();
         setCoachs(data.data);
         setFiltered(data.data);
-        console.log("data reçue :", data);
       } catch (err) {
         console.error("Erreur lors du fetch des coachs :", err);
       }
