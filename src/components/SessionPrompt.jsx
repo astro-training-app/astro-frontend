@@ -4,19 +4,19 @@ import { useEffect, useState } from "react";
 
 export default function SessionPrompt() {
   const { isAuthenticated } = useAuth();
-  const [mounted, setMounted] = useState(false); // vrai affichage JSX
-  const [slideIn, setSlideIn] = useState(false); // animation visible
+  const [mounted, setMounted] = useState(false); // allows component rendering
+  const [slideIn, setSlideIn] = useState(false); // controls animation visibility
 
   useEffect(() => {
     if (isAuthenticated) {
-      setMounted(true); // on monte le composant (on le voit en JSX)
+      setMounted(true); // render component in the DOM
       setTimeout(() => {
-        setSlideIn(true); // on démarre le slide (petit délai pour l'effet)
+        setSlideIn(true); // trigger slide-in effect after a short delay
       }, 50);
 
       const timer = setTimeout(() => {
-        setSlideIn(false); // on commence à le faire glisser
-        setTimeout(() => setMounted(false), 500); // après l'animation, on l'enlève du DOM
+        setSlideIn(false); // start slide-out
+        setTimeout(() => setMounted(false), 500); // remove from DOM after animation
       }, 5000);
 
       return () => clearTimeout(timer);
@@ -26,7 +26,7 @@ export default function SessionPrompt() {
     }
   }, [isAuthenticated]);
 
-  if (!mounted) return null; // on ne le rend pas si pas monté
+  if (!mounted) return null;
 
   return (
     <div
@@ -35,7 +35,7 @@ export default function SessionPrompt() {
         ${slideIn ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"}
         bg-green-600 text-white`}
     >
-      🫡 Vous êtes connecté à Astro Training
+      🫡 You are logged in to Astro Training
     </div>
   );
 }

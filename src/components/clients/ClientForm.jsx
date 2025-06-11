@@ -51,7 +51,7 @@ export default function ClientForm() {
       if (!response.ok) {
         throw new Error(result.message);
       } else {
-        toast.success("Client créé !");
+        toast.success("Client successfully created!");
         setFormData({
           nom: "",
           prenom: "",
@@ -64,18 +64,18 @@ export default function ClientForm() {
         setFileKey(Date.now());
       }
     } catch (err) {
-      toast.error("Erreur lors de la création du client.");
+      toast.error("Error while creating the client.");
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className="form-card">
-      <h2 className="form-title">Ajouter un client</h2>
+      <h2 className="form-title">Add a Client</h2>
 
       <input
         type="text"
         name="nom"
-        placeholder="Nom"
+        placeholder="Last Name"
         onChange={handleChange}
         value={formData.nom}
         className="input-style"
@@ -83,7 +83,7 @@ export default function ClientForm() {
       <input
         type="text"
         name="prenom"
-        placeholder="Prénom"
+        placeholder="First Name"
         onChange={handleChange}
         value={formData.prenom}
         className="input-style"
@@ -99,7 +99,7 @@ export default function ClientForm() {
       <input
         type="number"
         name="age"
-        placeholder="Âge"
+        placeholder="Age"
         onChange={handleChange}
         value={formData.age}
         className="input-style"
@@ -114,7 +114,7 @@ export default function ClientForm() {
             onChange={handleChange}
             checked={formData.sexe === "H"}
           />{" "}
-          Homme
+          Male
         </label>
         <label>
           <input
@@ -124,7 +124,7 @@ export default function ClientForm() {
             onChange={handleChange}
             checked={formData.sexe === "F"}
           />{" "}
-          Femme
+          Female
         </label>
       </div>
 
@@ -134,10 +134,10 @@ export default function ClientForm() {
         value={formData.objectif}
         className="input-style"
       >
-        <option value="">Choisir un objectif</option>
-        <option value="perte de poids">Perte de poids</option>
-        <option value="prise de masse">Prise de masse</option>
-        <option value="tonification">Tonification</option>
+        <option value="">Select a goal</option>
+        <option value="perte de poids">Weight loss</option>
+        <option value="prise de masse">Muscle gain</option>
+        <option value="tonification">Toning</option>
       </select>
 
       <input
@@ -149,7 +149,7 @@ export default function ClientForm() {
       />
 
       <button type="submit" className="btn-primary">
-        Envoyer
+        Submit
       </button>
     </form>
   );

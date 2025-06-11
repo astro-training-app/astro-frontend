@@ -21,7 +21,7 @@ export default function AjouterMensurationsPage() {
   return (
     <main className="min-h-screen dark:bg-background dark:text-white text-black p-10 space-y-10">
       <h1 className="text-3xl font-bold text-center">
-        Mensurations du client #{id}
+        Body Measurements #{id}
       </h1>
 
       {/* ✅ Formulaire d’ajout */}

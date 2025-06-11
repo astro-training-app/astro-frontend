@@ -53,18 +53,18 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre email"
+                placeholder="Your email"
                 required
                 className="input-style"
               />
             </div>
             <div>
-              <label className="block mb-1">Mot de passe</label>
+              <label className="block mb-1">Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Votre mot de passe"
+                placeholder="Your password"
                 required
                 className="input-style"
               />
@@ -73,7 +73,7 @@ export default function Login() {
               type="submit"
               className="w-full bg-primary text-white font-semibold py-2 px-4 rounded cursor-pointer hover:bg-button-hover-bg transition duration-300 ease-in-out"
             >
-              Se connecter
+              Log in
             </button>
           </form>
         </div>

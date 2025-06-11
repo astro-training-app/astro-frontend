@@ -54,7 +54,7 @@ export default function DevenirCoach() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block mb-1 text-sm font-bold">Nom</label>
+            <label className="block mb-1 text-sm font-bold">Name</label>
             <input
               type="text"
               value={nom}
@@ -78,7 +78,7 @@ export default function DevenirCoach() {
           </div>
 
           <div>
-            <label className="block mb-1 text-sm font-bold">Mot de passe</label>
+            <label className="block mb-1 text-sm font-bold">Password</label>
             <input
               type="password"
               value={password}
@@ -93,7 +93,7 @@ export default function DevenirCoach() {
             type="submit"
             className="w-full bg-primary text-white py-2 px-4 rounded hover:bg-button-hover-bg transition focus:outline-primary"
           >
-            Créer un compte coach
+            Create a Coach Account
           </button>
         </form>
       </div>

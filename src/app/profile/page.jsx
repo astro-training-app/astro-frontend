@@ -29,7 +29,7 @@ export default function Profile() {
             },
           });
           if (!response.ok) {
-            throw new Error("Erreur lors de la récupération des coaches");
+            throw new Error("Error while fetching coaches");
           }
           const responseData = await response.json();
 
@@ -37,9 +37,7 @@ export default function Profile() {
           if (Array.isArray(responseData.data)) {
             setCoaches(responseData.data);
           } else {
-            throw new Error(
-              "Les données des coaches ne sont pas sous forme de tableau."
-            );
+            throw new Error("Coach data is not in array format.");
           }
         } catch (error) {
           setError(error.message);
@@ -54,14 +52,14 @@ export default function Profile() {
 
   if (checking) {
     return (
-      <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Chargement...</p>
+      <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Loading...</p>
     );
   }
 
   if (!isAuthenticated) {
     return (
       <p className="bg-red-100 text-red-600 p-10 rounded-lg">
-        Accès refusé. Veuillez vous connecter pour accéder à cette page.
+        Access denied. Please log in to access this page.
       </p>
     );
   }
@@ -69,7 +67,7 @@ export default function Profile() {
   if (loading) {
     return (
       <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">
-        Chargement des données...
+        Loading data...
       </p>
     );
   }
@@ -77,7 +75,7 @@ export default function Profile() {
   if (error) {
     return (
       <p className="bg-red-100 text-red-600 p-10 rounded-lg">
-        Une erreur est survenue : {error}
+        An error occurred : {error}
       </p>
     );
   }
@@ -140,7 +138,7 @@ export default function Profile() {
               ))}
             </div>
           ) : (
-            <p className="">Aucun coach disponible.</p>
+            <p className="">No coach available.</p>
           )}
         </div>
 

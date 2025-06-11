@@ -11,13 +11,13 @@ export default function FetchCoachTest() {
         setCoaches(data);
       })
       .catch((err) => {
-        console.error("Erreur lors du fetch :", err);
+        console.error("Error fetching coaches:", err);
       });
   }, []);
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Liste des coachs :</h1>
+      <h1 className="text-2xl font-bold mb-4">List of Coaches:</h1>
       <ul>
         {coaches.map((coach, index) => (
           <li key={index}>

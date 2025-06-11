@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 import { motion } from "framer-motion";
 
-// Animation container pour la liste
+// Animation container for the list
 const container = {
   hidden: {},
   visible: {
@@ -15,76 +15,76 @@ const container = {
   },
 };
 
-// Animation des éléments
+// Animation for each item
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
 
-export default function TrouverCoach() {
-  const [search, setSearch] = useState(""); // Recherche texte
-  const [coachs, setCoachs] = useState([]); // Coachs récupérés
-  const [filtered, setFiltered] = useState([]); // Coachs filtrés
+export default function FindCoach() {
+  const [search, setSearch] = useState(""); // Text search
+  const [coaches, setCoaches] = useState([]); // Fetched coaches
+  const [filtered, setFiltered] = useState([]); // Filtered coaches
 
-  // je recup les coachs au chargement de la page
+  // Fetch coaches when page loads
   useEffect(() => {
-    const fetchCoachs = async () => {
+    const fetchCoaches = async () => {
       try {
         const res = await fetch("http://localhost:3000/api/coaches/all");
         const data = await res.json();
-        setCoachs(data.data);
+        setCoaches(data.data);
         setFiltered(data.data);
       } catch (err) {
-        console.error("Erreur lors du fetch des coachs :", err);
+        console.error("Error while fetching coaches:", err);
       }
     };
 
-    fetchCoachs();
+    fetchCoaches();
   }, []);
 
-  // Filtrage quand on tape dmais avec la despcription en moins
+  // Filter results when typing (excluding description)
   useEffect(() => {
-    const resultats = coachs.filter((coach) => {
-      const nom = coach.nom?.toLowerCase() || "";
+    const results = coaches.filter((coach) => {
+      const name = coach.nom?.toLowerCase() || "";
       const email = coach.email?.toLowerCase() || "";
-      const recherche = search.toLowerCase();
+      const query = search.toLowerCase();
 
-      return nom.includes(recherche) || email.includes(recherche);
+      return name.includes(query) || email.includes(query);
     });
 
-    setFiltered(resultats);
-  }, [search, coachs]);
+    setFiltered(results);
+  }, [search, coaches]);
 
   return (
     <MotionLayoutWrapper>
       <div className="w-full max-w-6xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-background text-secondary">
         <div className="mb-10">
-          <h2 className="text-7xl font-bold mb-4">Nos coachs</h2>
+          <h2 className="text-7xl font-bold mb-4">Our Coaches</h2>
           <p className="text-subtitle max-w-2xl sm:text-xl text-lg">
-            Découvrez les coachs disponibles, et contactez celui qui vous
-            correspond.
+            Discover the available coaches and get in touch with the one that
+            suits you best.
           </p>
         </div>
 
-        {/* 🔍 Barre de recherche */}
+        {/* 🔍 Search bar */}
         <div className="mb-4 sm:mb-6">
           <label
             htmlFor="search"
             className="block text-sm sm:text-base font-medium text-secondary mb-1"
           >
-            Rechercher un coach :
+            Search for a coach
           </label>
           <input
             type="text"
             id="search"
-            placeholder="Nom ou email..."
+            placeholder="Name or Email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-md px-4 py-2 text-sm sm:text-base text-secondary border border-subtitle focus:outline-primary"
           />
         </div>
 
-        {/* Liste animée des coachs filtrés */}
+        {/* Animated list of coaches */}
         <motion.ul
           className="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-6 sm:gap-8 justify-center"
           variants={container}
