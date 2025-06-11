@@ -19,7 +19,7 @@ export default function MockClientPage() {
 
       {/* Formulaire d'ajout */}
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Ajouter une mensuration</h2>
+        <h2 className="text-2xl font-semibold mb-4">Add a measurment</h2>
         <FormulaireMensurations
           clientId={id}
           onNewMensuration={() => setMajGraph((v) => !v)}

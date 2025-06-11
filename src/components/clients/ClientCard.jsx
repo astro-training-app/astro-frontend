@@ -3,7 +3,17 @@ import Link from "next/link";
 export default function ClientCard({ client, onDelete }) {
   const { id, prenom, nom, email, age, sexe, objectif, created_at, photo } =
     client;
+
+  // Translate gender
   const sexeLabel = sexe === "H" ? "Man" : sexe === "F" ? "Woman" : "Other";
+
+  // Translate goal
+  const objectifMap = {
+    "perte de poids": "Weight loss",
+    "prise de masse": "Muscle gain",
+    tonification: "Toning",
+  };
+  const translatedGoal = objectifMap[objectif] || objectif;
 
   return (
     <Link href={`/clients/${client.id}/mensuration`} className="block group">
@@ -13,7 +23,7 @@ export default function ClientCard({ client, onDelete }) {
             {photo ? (
               <img
                 src={photo}
-                alt={`${prenom} ${nom}`}
+                alt={`Profile picture of ${prenom} ${nom}`}
                 className="w-full h-auto object-cover rounded-md"
               />
             ) : (
@@ -30,20 +40,20 @@ export default function ClientCard({ client, onDelete }) {
 
         <div className="mt-4 space-y-2 text-sm text-gray-800 dark:text-gray-300">
           <p>
-            <span className="font-medium">Age :</span> {age} years
+            <span className="font-medium">Age:</span> {age} years
           </p>
           <p>
-            <span className="font-medium">Gender :</span> {sexeLabel}
+            <span className="font-medium">Gender:</span> {sexeLabel}
           </p>
           <p>
-            <span className="font-medium">Goal :</span> {objectif}
+            <span className="font-medium">Goal:</span> {translatedGoal}
           </p>
           <p>
-            <span className="font-medium">Registered on :</span>{" "}
+            <span className="font-medium">Registered on:</span>{" "}
             {new Date(created_at).toLocaleDateString()}
           </p>
 
-          {/* bouton indépendant du lien */}
+          {/* Independent delete button */}
           <button
             onClick={(e) => {
               e.stopPropagation();

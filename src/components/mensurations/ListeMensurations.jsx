@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 
 const url = "http://localhost:3000/api/mensurations";
 
-export default function ListeMensurations() {
+export default function MeasurementList() {
   const [mensuration, setMensuration] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch(url); // Effectue une requête GET par défaut
+        const res = await fetch(url);
         if (!res.ok) {
-          throw new Error("Erreur lors de la récupération des données");
+          throw new Error("Error while fetching data");
         }
         const data = await res.json();
         setMensuration(data);
       } catch (error) {
-        console.error("Erreur :", error);
+        console.error("Fetch error:", error);
       }
     };
 
@@ -31,13 +31,12 @@ export default function ListeMensurations() {
       });
 
       if (!res.ok) {
-        throw new Error("Erreur lors de la suppression");
+        throw new Error("Error while deleting data");
       }
 
-      // Mise à jour de l’état local sans la ligne supprimée
       setMensuration((prev) => prev.filter((item) => item.id !== id));
     } catch (error) {
-      console.error("Erreur suppression :", error);
+      console.error("Delete error:", error);
     }
   };
 
@@ -49,18 +48,18 @@ export default function ListeMensurations() {
           className="dark:bg-background rounded-lg p-4 shadow-md border bg-white"
         >
           <p className="text-lg font-semibold mb-2">📅 {item.date_mesure}</p>
-          <p>⚖️ Poids : {item.poids} kg</p>
-          <p>📏 Taille : {item.taille} cm</p>
-          <p>💪 Biceps : {item.tour_biceps} cm</p>
-          <p>🧍 Poitrine : {item.tour_poitrine} cm</p>
-          <p>🧍‍♂️ Taille : {item.tour_taille} cm</p>
-          <p>🦵 Cuisse : {item.tour_cuisse} cm</p>
+          <p>⚖️ Weight: {item.poids} kg</p>
+          <p>📏 Height: {item.taille} cm</p>
+          <p>💪 Biceps: {item.tour_biceps} cm</p>
+          <p>🧍 Chest: {item.tour_poitrine} cm</p>
+          <p>🧍‍♂️ Waist: {item.tour_taille} cm</p>
+          <p>🦵 Thigh: {item.tour_cuisse} cm</p>
 
           <button
             onClick={() => handleDelete(item.id)}
             className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white"
           >
-            🗑️ Supprimer
+            🗑️ Delete
           </button>
         </div>
       ))}

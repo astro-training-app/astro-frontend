@@ -13,11 +13,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function GraphiqueMensurations({ clientId, refresh }) {
+export default function MeasurementsChart({ clientId, refresh }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { theme } = useTheme(); // ✅ récupération du thème
-  const strokeColor = theme === "dark" ? "#ffffff" : "#000000"; // ✅ stroke dynamique
+  const { theme } = useTheme();
+  const strokeColor = theme === "dark" ? "#ffffff" : "#000000";
 
   const [courbesActives, setCourbesActives] = useState({
     poids: true,
@@ -37,13 +37,13 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
     tour_cuisse: "#aa88ff",
   };
 
-  const nomsAffichés = {
-    poids: "Poids (kg)",
-    taille: "Taille (cm)",
+  const displayLabels = {
+    poids: "Weight (kg)",
+    taille: "Height (cm)",
     tour_biceps: "Biceps (cm)",
-    tour_poitrine: "Poitrine (cm)",
-    tour_taille: "Tour Taille (cm)",
-    tour_cuisse: "Cuisse (cm)",
+    tour_poitrine: "Chest (cm)",
+    tour_taille: "Waist (cm)",
+    tour_cuisse: "Thigh (cm)",
   };
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
         );
         const raw = await res.json();
 
-        // Tri des dates
+        // Sort by date
         raw.sort((a, b) => new Date(a.date_mesure) - new Date(b.date_mesure));
 
         let last = {
@@ -79,7 +79,7 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
 
         setData(complet);
       } catch (err) {
-        console.error("Erreur chargement graphique :", err);
+        console.error("Chart load error:", err);
       } finally {
         setLoading(false);
       }
@@ -89,17 +89,15 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
   }, [clientId, refresh]);
 
   if (loading)
-    return (
-      <p className="text-white text-center">⏳ Chargement du graphique...</p>
-    );
+    return <p className="text-white text-center">⏳ Loading chart...</p>;
   if (data.length === 0)
-    return <p className="text-white text-center">Aucune donnée à afficher.</p>;
+    return <p className="text-white text-center">No data available.</p>;
 
   return (
     <div className="bg-white text-black dark:bg-background dark:text-white border p-6 rounded-xl shadow">
-      <h3 className="text-xl font-bold mb-4">Évolution des mensurations</h3>
+      <h3 className="text-xl font-bold mb-4">Measurements Progress</h3>
 
-      {/* 🟦 Filtres dynamiques */}
+      {/* 🔘 Filter checkboxes */}
       <div className="mb-6 flex flex-wrap gap-4 text-sm">
         {Object.keys(courbesActives).map((key) => (
           <label key={key} className="flex items-center gap-1">
@@ -113,12 +111,12 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
                 }))
               }
             />
-            {nomsAffichés[key]}
+            {displayLabels[key]}
           </label>
         ))}
       </div>
 
-      {/* 🟨 Graphique */}
+      {/* 📈 Chart */}
       <ResponsiveContainer width="100%" height={350}>
         <LineChart data={data}>
           <CartesianGrid stroke={strokeColor} strokeDasharray="3 3" />
@@ -135,7 +133,7 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
                   type="monotone"
                   dataKey={key}
                   stroke={couleurs[key] || "#ccc"}
-                  name={nomsAffichés[key] || key}
+                  name={displayLabels[key] || key}
                   dot={false}
                 />
               )
