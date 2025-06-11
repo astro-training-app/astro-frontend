@@ -33,9 +33,10 @@ function Content({ children }) {
       <BurgerBtn className="fixed  top-4 left-4" />
       <Navbar />
 
-      <div className="md:ml-navbar flex flex-col h-full w-full overflow-y-auto">
-        <main className="p-4 w-full">{children}</main>
+      <div className="md:ml-navbar flex flex-col min-h-screen w-full">
+        <main className="p-4 flex-grow">{children}</main>
         <Footer />
+        
       </div>
     </div>
   );
