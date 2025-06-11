@@ -83,44 +83,64 @@ export default function Profile() {
   }
 
   return (
-    <main className="min-h-screen p-10 text-gray-800">
-      <div className="bg-gray-200 p-6 rounded-lg">
-        <h1 className="text-3xl font-bold mb-4">Mon Profil</h1>
-        <p className="text-green-600">Vous êtes connecté !</p>
+    <main className="">
+      <div className="">
+        <h1 className="text-3xl font-bold mb-4">My Profile</h1>
 
         {/* Displaying the fetched coaches */}
         <div className="mt-6">
-          <h2 className="text-xl font-semibold">Mes Coaches :</h2>
-
           {coaches.length > 0 ? (
             <div className="space-y-4">
               {coaches.map((coach) => (
-                <div key={coach.id} className="border p-4 rounded-lg">
+                <div key={coach.id} className="space-y-10">
                   <h3 className="text-2xl font-semibold">{coach.nom}</h3>
                   {/* Afficher l'image du coach, si disponible */}
-                  {coach.image ? (
-                    <img
-                      src={coach.image}
-                      alt={coach.nom}
-                      className="w-32 h-32 object-cover rounded-full"
-                    />
-                  ) : (
-                    <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center">
-                      <span className="text-white">Pas d'image</span>
+                  <div className="flex gap-10">
+                    {coach.image ? (
+                      <img
+                        src={coach.image}
+                        alt={coach.nom}
+                        className="w-32 h-32 object-cover rounded-full"
+                      />
+                    ) : (
+                      <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center">
+                        <span className="text-white">Missing image</span>
+                      </div>
+                    )}
+                    <div className="h-fit *:flex self-center *:justify-between *:text-secondary w-1/2">
+                      <p className="">
+                        Email:{" "}
+                        <span>
+                          <b>{coach.email}</b>
+                        </span>
+                      </p>
+                      <p>
+                        Role:{" "}
+                        <span>
+                          <b>{coach.role}</b>
+                        </span>
+                      </p>
+                      <p>
+                        Account type:{" "}
+                        <span>
+                          <b>{coach.type_compte}</b>
+                        </span>
+                      </p>
+                      <p>
+                        Created at:{" "}
+                        <span>
+                          <b>
+                            {new Date(coach.created_at).toLocaleDateString()}
+                          </b>
+                        </span>
+                      </p>
                     </div>
-                  )}
-                  <p>Email: {coach.email}</p>
-                  <p>Rôle: {coach.role}</p>
-                  <p>Type de compte: {coach.type_compte}</p>
-                  <p>
-                    Inscrit le:{" "}
-                    {new Date(coach.created_at).toLocaleDateString()}
-                  </p>
+                  </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-gray-600">Aucun coach disponible.</p>
+            <p className="">Aucun coach disponible.</p>
           )}
         </div>
 
@@ -128,15 +148,15 @@ export default function Profile() {
         <div className="mt-6 flex flex-col sm:flex-row gap-4">
           <button
             onClick={() => router.push("/ajouter-client")}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+            className="bg-primary hover:bg-button-hover-bg transition text-white px-4 py-2 rounded"
           >
-            ➕ Ajouter un client
+            Add client
           </button>
           <button
             onClick={() => router.push("/clients")}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded"
+            className=" text-primary px-4 py-2 rounded border border-primary"
           >
-            👥 Voir mes clients
+            View clients
           </button>
         </div>
       </div>
