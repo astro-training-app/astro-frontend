@@ -10,10 +10,8 @@ import GraphiqueMensurations from "@/components/GraphiqueMensurations";
 export default function AjouterMensurationsPage() {
   const { id } = useParams();
 
-  // 🔁 État pour forcer le refresh
   const [refresh, setRefresh] = useState(0);
 
-  // 🔁 Fonction appelée après ajout/suppression
   const handleRefresh = () => {
     setRefresh((prev) => prev + 1);
   };
