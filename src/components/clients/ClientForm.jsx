@@ -4,13 +4,19 @@ import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
 export default function ClientForm() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  const CLIENTS_ENDPOINT = process.env.NEXT_PUBLIC_CLIENTS_ENDPOINT;
+
+  const URL = `${API_URL}${CLIENTS_ENDPOINT}`;
+
   const [formData, setFormData] = useState({
-    nom: "",
-    prenom: "",
+    lastName: "",
+    firstName: "",
     email: "",
+    gender: "",
     age: "",
-    sexe: "",
-    objectif: "",
+    goal: "",
     photo: null,
   });
 
@@ -30,19 +36,19 @@ export default function ClientForm() {
     try {
       const token = Cookies.get("token");
 
-      const response = await fetch("http://localhost:3000/api/clients", {
+      const response = await fetch(URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          nom: formData.nom,
-          prenom: formData.prenom,
+          lastName: formData.lastName,
+          firstName: formData.firstName,
           email: formData.email,
           age: parseInt(formData.age),
-          sexe: formData.sexe,
-          objectif: formData.objectif,
+          gender: formData.gender,
+          goal: formData.goal,
           photo: "",
         }),
       });
@@ -51,41 +57,41 @@ export default function ClientForm() {
       if (!response.ok) {
         throw new Error(result.message);
       } else {
-        toast.success("Client créé !");
+        toast.success("Client successfully created.");
         setFormData({
-          nom: "",
-          prenom: "",
+          lastName: "",
+          firstName: "",
           email: "",
           age: "",
-          sexe: "",
-          objectif: "",
+          gender: "",
+          goal: "",
           photo: null,
         });
         setFileKey(Date.now());
       }
     } catch (err) {
-      toast.error("Erreur lors de la création du client.");
+      toast.error("An error occurred when creating the client.");
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className="form-card">
-      <h2 className="form-title">Ajouter un client</h2>
+      <h2 className="form-title">Add client</h2>
 
       <input
         type="text"
-        name="nom"
-        placeholder="Nom"
+        name="lastName"
+        placeholder="Last Name"
         onChange={handleChange}
-        value={formData.nom}
+        value={formData.lastName}
         className="input-style"
       />
       <input
         type="text"
-        name="prenom"
-        placeholder="Prénom"
+        name="firstName"
+        placeholder="First Name"
         onChange={handleChange}
-        value={formData.prenom}
+        value={formData.firstName}
         className="input-style"
       />
       <input
@@ -99,7 +105,7 @@ export default function ClientForm() {
       <input
         type="number"
         name="age"
-        placeholder="Âge"
+        placeholder="Age"
         onChange={handleChange}
         value={formData.age}
         className="input-style"
@@ -109,35 +115,35 @@ export default function ClientForm() {
         <label>
           <input
             type="radio"
-            name="sexe"
-            value="H"
+            name="gender"
+            value="M"
             onChange={handleChange}
-            checked={formData.sexe === "H"}
+            checked={formData.gender === "M"}
           />{" "}
-          Homme
+          Men
         </label>
         <label>
           <input
             type="radio"
-            name="sexe"
-            value="F"
+            name="gender"
+            value="W"
             onChange={handleChange}
-            checked={formData.sexe === "F"}
+            checked={formData.gender === "W"}
           />{" "}
-          Femme
+          Women
         </label>
       </div>
 
       <select
-        name="objectif"
+        name="goal"
         onChange={handleChange}
-        value={formData.objectif}
+        value={formData.goal}
         className="input-style"
       >
-        <option value="">Choisir un objectif</option>
-        <option value="perte de poids">Perte de poids</option>
-        <option value="prise de masse">Prise de masse</option>
-        <option value="tonification">Tonification</option>
+        <option value="">Select a goal</option>
+        <option value="weight loss">Weight loss</option>
+        <option value="mass gain">Mass gain</option>
+        <option value="toning">Toning</option>
       </select>
 
       <input
@@ -149,7 +155,7 @@ export default function ClientForm() {
       />
 
       <button type="submit" className="btn-primary">
-        Envoyer
+        Send
       </button>
     </form>
   );
