@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function ClientCard({ client, onDelete }) {
   const { id, prenom, nom, email, age, sexe, objectif, created_at, photo } =
     client;
-  const sexeLabel = sexe === "H" ? "Homme" : sexe === "F" ? "Femme" : "Autre";
+  const sexeLabel = sexe === "H" ? "Man" : sexe === "F" ? "Woman" : "Other";
 
   return (
     <Link href={`/clients/${client.id}/mensuration`} className="block group">
@@ -30,16 +30,16 @@ export default function ClientCard({ client, onDelete }) {
 
         <div className="mt-4 space-y-2 text-sm text-gray-800 dark:text-gray-300">
           <p>
-            <span className="font-medium">Âge :</span> {age} ans
+            <span className="font-medium">Age :</span> {age} years
           </p>
           <p>
-            <span className="font-medium">Sexe :</span> {sexeLabel}
+            <span className="font-medium">Gender :</span> {sexeLabel}
           </p>
           <p>
-            <span className="font-medium">Objectif :</span> {objectif}
+            <span className="font-medium">Goal :</span> {objectif}
           </p>
           <p>
-            <span className="font-medium">Inscrit le :</span>{" "}
+            <span className="font-medium">Registered on :</span>{" "}
             {new Date(created_at).toLocaleDateString()}
           </p>
 
@@ -51,7 +51,7 @@ export default function ClientCard({ client, onDelete }) {
             }}
             className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 w-full"
           >
-            Supprimer
+            Delete
           </button>
         </div>
       </div>

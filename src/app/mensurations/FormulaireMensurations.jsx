@@ -27,8 +27,8 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         const data = await res.json();
         setMensurations(data);
       } catch (error) {
-        console.error("Erreur lors du chargement :", error);
-        toast.error("Erreur lors du chargement des mensurations.");
+        console.error("Error from loading :", error);
+        toast.error("Error lors du chargement des mensurations.");
       }
     };
 
@@ -97,7 +97,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         onSubmit={handleSubmit}
         className="space-y-4 p-6 dark:bg-black border rounded-xl dark:text-white max-w-md mx-auto"
       >
-        <h2 className="text-2xl font-bold">Ajouter une mensuration</h2>
+        <h2 className="text-2xl font-bold">Add a Measurement</h2>
 
         <input
           type="date"
@@ -110,7 +110,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         <input
           type="number"
           name="poids"
-          placeholder="Poids (kg)"
+          placeholder="Weight (kg)"
           value={formData.poids}
           onChange={handleChange}
           className="input-style"
@@ -118,7 +118,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         <input
           type="number"
           name="taille"
-          placeholder="Taille (cm)"
+          placeholder="Height (cm)"
           value={formData.taille}
           onChange={handleChange}
           className="input-style"
@@ -126,7 +126,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         <input
           type="number"
           name="tour_biceps"
-          placeholder="Tour de biceps (cm)"
+          placeholder="Biceps (cm)"
           value={formData.tour_biceps}
           onChange={handleChange}
           className="input-style"
@@ -134,7 +134,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         <input
           type="number"
           name="tour_poitrine"
-          placeholder="Tour de poitrine (cm)"
+          placeholder="Chest (cm)"
           value={formData.tour_poitrine}
           onChange={handleChange}
           className="input-style"
@@ -142,7 +142,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         <input
           type="number"
           name="tour_taille"
-          placeholder="Tour de taille (cm)"
+          placeholder="Waist (cm)"
           value={formData.tour_taille}
           onChange={handleChange}
           className="input-style"
@@ -150,7 +150,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         <input
           type="number"
           name="tour_cuisse"
-          placeholder="Tour de cuisse (cm)"
+          placeholder="Thigh (cm)"
           value={formData.tour_cuisse}
           onChange={handleChange}
           className="input-style"
@@ -160,7 +160,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
           type="submit"
           className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-white"
         >
-          Enregistrer la mensuration
+          Save Measurement
         </button>
       </form>
     </>

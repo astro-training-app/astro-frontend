@@ -47,7 +47,7 @@ export default function HistoriqueMensurations({
 
         setMensurations(complet);
       } catch (err) {
-        console.error("Erreur lors du chargement :", err);
+        console.error("Error from loading :", err);
       } finally {
         setLoading(false);
       }
@@ -56,14 +56,14 @@ export default function HistoriqueMensurations({
     fetchMensurations();
   }, [clientId, refresh]);
 
-  if (loading) return <p className="text-center">⏳ Chargement...</p>;
+  if (loading) return <p className="text-center">⏳ Loading...</p>;
 
   if (mensurations.length === 0) {
-    return <p className="text-center">Aucune mensuration enregistrée.</p>;
+    return <p className="text-center">No measurements found.</p>;
   }
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm("Supprimer cette mensuration ?");
+    const confirm = window.confirm("Delete this measurements ?");
     if (!confirm) return;
 
     try {
@@ -71,12 +71,12 @@ export default function HistoriqueMensurations({
         method: "DELETE",
       });
 
-      if (!res.ok) throw new Error("Erreur suppression");
+      if (!res.ok) throw new Error("Erreur deleting");
 
       if (typeof refreshNow === "function") refreshNow();
     } catch (err) {
-      console.error("Erreur :", err);
-      alert("Impossible de supprimer cette mensuration.");
+      console.error("Error :", err);
+      alert("Impossible to delete this measurement.");
     }
   };
 
@@ -91,29 +91,29 @@ export default function HistoriqueMensurations({
             <strong>📅 Date :</strong> {m.date_mesure}
           </p>
           <p>
-            <strong>⚖️ Poids :</strong> {m.poids} kg
+            <strong>⚖️ Weight :</strong> {m.poids} kg
           </p>
           <p>
-            <strong>📏 Taille :</strong> {m.taille} cm
+            <strong>📏 Height :</strong> {m.taille} cm
           </p>
           <div className="grid grid-cols-2 gap-2 mt-2">
             <p>
               <strong>Biceps :</strong> {m.tour_biceps} cm
             </p>
             <p>
-              <strong>Poitrine :</strong> {m.tour_poitrine} cm
+              <strong>Chest :</strong> {m.tour_poitrine} cm
             </p>
             <p>
-              <strong>Taille :</strong> {m.tour_taille} cm
+              <strong>Waist :</strong> {m.tour_taille} cm
             </p>
             <p>
-              <strong>Cuisse :</strong> {m.tour_cuisse} cm
+              <strong>Thigh :</strong> {m.tour_cuisse} cm
             </p>
             <button
               onClick={() => handleDelete(m.id)}
               className="mt-2 text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
             >
-              🗑️ Supprimer
+              🗑️ Delete
             </button>
           </div>
         </li>

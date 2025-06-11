@@ -23,7 +23,7 @@ export default function CoachCard({
           rel="noopener noreferrer"
           className="mt-6 inline-block text-primary hover:underline text-lg font-semibold"
         >
-          Voir le profil{" "}
+          View profil{" "}
           <ExternalLink className="inline w-5 h-5 ml-2 text-[var(--primary)]" />
         </a>
       </div>

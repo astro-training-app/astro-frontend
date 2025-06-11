@@ -59,10 +59,10 @@ export default function TrouverCoach() {
     <MotionLayoutWrapper>
       <div className="w-full max-w-6xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-background text-secondary">
         <div className="mb-10">
-          <h2 className="text-7xl font-bold mb-4">Nos coachs</h2>
+          <h2 className="text-7xl font-bold mb-4">Our coachs</h2>
           <p className="text-subtitle max-w-2xl sm:text-xl text-lg">
-            Découvrez les coachs disponibles, et contactez celui qui vous
-            correspond.
+            Discover the available coaches and get in touch with the one that
+            suits you best.
           </p>
         </div>
 
@@ -72,12 +72,12 @@ export default function TrouverCoach() {
             htmlFor="search"
             className="block text-sm sm:text-base font-medium text-secondary mb-1"
           >
-            Rechercher un coach :
+            Search a coach
           </label>
           <input
             type="text"
             id="search"
-            placeholder="Nom ou email..."
+            placeholder="Name or Email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-md px-4 py-2 text-sm sm:text-base text-secondary border border-subtitle focus:outline-primary"

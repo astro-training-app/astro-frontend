@@ -54,15 +54,13 @@ export default function ClientList() {
 
   if (checking)
     return (
-      <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Chargement...</p>
+      <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Loading...</p>
     );
 
   return (
-    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white p-10">
+    <main className="bg-white dark:bg-black text-black dark:text-white p-10">
       <MotionLayoutWrapper>
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          Liste des clients
-        </h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">Client List</h1>
 
         <div className="grid grid-cols-1 min-[900px]:grid-cols-2 gap-6 justify-items-center">
           {clients.map((client) => (
