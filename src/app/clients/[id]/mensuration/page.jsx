@@ -4,8 +4,8 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 
 import FormulaireMensurations from "@/app/mensurations/FormulaireMensurations";
-import HistoriqueMensurations from "@/components/HistoriqueMensurations";
-import GraphiqueMensurations from "@/components/GraphiqueMensurations";
+import HistoriqueMensurations from "@/components/mensurations/HistoriqueMensurations";
+import GraphiqueMensurations from "@/components/mensurations/GraphiqueMensurations";
 
 export default function AjouterMensurationsPage() {
   const { id } = useParams();

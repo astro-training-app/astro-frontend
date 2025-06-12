@@ -6,36 +6,34 @@ import { toast } from "react-hot-toast";
 
 export default function FormulaireMensurations({ clientId, onNewMensuration }) {
   const [formData, setFormData] = useState({
-    date_mesure: "",
-    poids: "",
-    taille: "",
-    tour_biceps: "",
-    tour_poitrine: "",
-    tour_taille: "",
-    tour_cuisse: "",
+    date: "",
+    weight: "",
+    height: "",
+    biceps: "",
+    chest: "",
+    waist: "",
+    thigh: "",
   });
 
   const [mensurations, setMensurations] = useState([]);
 
-  // Récupérer les mensurations du client
   useEffect(() => {
     const fetchMensurations = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/mensurations/client/${clientId}`
+          `http://localhost:3000/api/measurements/client/${clientId}`
         );
         const data = await res.json();
-        setMensurations(data);
+        setMensurations(data.data || []);
       } catch (error) {
-        console.error("Erreur lors du chargement :", error);
-        toast.error("Erreur lors du chargement des mensurations.");
+        console.error("Error loading measurements:", error);
+        toast.error("Failed to load measurements.");
       }
     };
 
     fetchMensurations();
   }, [clientId]);
 
-  // Gérer les changements dans les champs du formulaire
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -44,14 +42,13 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
     }));
   }
 
-  // Envoi du formulaire
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
       const token = Cookies.get("token");
 
-      const response = await fetch("http://localhost:3000/api/mensurations", {
+      const response = await fetch("http://localhost:3000/api/measurements", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,110 +56,106 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         },
         body: JSON.stringify({
           ...formData,
-          poids: parseFloat(formData.poids),
-          taille: parseFloat(formData.taille),
-          tour_biceps: parseFloat(formData.tour_biceps),
-          tour_poitrine: parseFloat(formData.tour_poitrine),
-          tour_taille: parseFloat(formData.tour_taille),
-          tour_cuisse: parseFloat(formData.tour_cuisse),
+          weight: parseFloat(formData.weight),
+          height: parseFloat(formData.height),
+          biceps: parseFloat(formData.biceps),
+          chest: parseFloat(formData.chest),
+          waist: parseFloat(formData.waist),
+          thigh: parseFloat(formData.thigh),
           client_id: parseInt(clientId),
         }),
       });
 
       const result = await response.json();
-
       if (!response.ok) throw new Error(result.message);
-      toast.success("Mensuration successfully added.");
+
+      toast.success("Measurement successfully added.");
       setFormData({
-        date_mesure: "",
-        poids: "",
-        taille: "",
-        tour_biceps: "",
-        tour_poitrine: "",
-        tour_taille: "",
-        tour_cuisse: "",
+        date: "",
+        weight: "",
+        height: "",
+        biceps: "",
+        chest: "",
+        waist: "",
+        thigh: "",
       });
       if (onNewMensuration) onNewMensuration();
-      // Recharger la liste
       setMensurations((prev) => [...prev, result]);
     } catch (err) {
-      console.error("❌ Erreur :", err);
+      console.error("❌ Error:", err);
       toast.error("An error occurred.");
     }
   }
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4 p-6 dark:bg-black border rounded-xl dark:text-white max-w-md mx-auto"
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 p-6 dark:bg-black border rounded-xl dark:text-white max-w-md mx-auto"
+    >
+      <h2 className="text-2xl font-bold">Add a Measurement</h2>
+
+      <input
+        type="date"
+        name="date"
+        value={formData.date}
+        onChange={handleChange}
+        className="input-style"
+      />
+      <input
+        type="number"
+        name="weight"
+        placeholder="Weight (kg)"
+        value={formData.weight}
+        onChange={handleChange}
+        className="input-style"
+      />
+      <input
+        type="number"
+        name="height"
+        placeholder="Height (cm)"
+        value={formData.height}
+        onChange={handleChange}
+        className="input-style"
+      />
+      <input
+        type="number"
+        name="biceps"
+        placeholder="Biceps (cm)"
+        value={formData.biceps}
+        onChange={handleChange}
+        className="input-style"
+      />
+      <input
+        type="number"
+        name="chest"
+        placeholder="Chest (cm)"
+        value={formData.chest}
+        onChange={handleChange}
+        className="input-style"
+      />
+      <input
+        type="number"
+        name="waist"
+        placeholder="Waist (cm)"
+        value={formData.waist}
+        onChange={handleChange}
+        className="input-style"
+      />
+      <input
+        type="number"
+        name="thigh"
+        placeholder="Thigh (cm)"
+        value={formData.thigh}
+        onChange={handleChange}
+        className="input-style"
+      />
+
+      <button
+        type="submit"
+        className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-white w-full"
       >
-        <h2 className="text-2xl font-bold">Ajouter une mensuration</h2>
-
-        <input
-          type="date"
-          name="date_mesure"
-          value={formData.date_mesure}
-          onChange={handleChange}
-          className="input-style"
-        />
-
-        <input
-          type="number"
-          name="poids"
-          placeholder="Poids (kg)"
-          value={formData.poids}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="taille"
-          placeholder="Taille (cm)"
-          value={formData.taille}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="tour_biceps"
-          placeholder="Tour de biceps (cm)"
-          value={formData.tour_biceps}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="tour_poitrine"
-          placeholder="Tour de poitrine (cm)"
-          value={formData.tour_poitrine}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="tour_taille"
-          placeholder="Tour de taille (cm)"
-          value={formData.tour_taille}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="tour_cuisse"
-          placeholder="Tour de cuisse (cm)"
-          value={formData.tour_cuisse}
-          onChange={handleChange}
-          className="input-style"
-        />
-
-        <button
-          type="submit"
-          className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-white"
-        >
-          Enregistrer la mensuration
-        </button>
-      </form>
-    </>
+        Save measurement
+      </button>
+    </form>
   );
 }
