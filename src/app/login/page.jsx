@@ -6,7 +6,11 @@ import { useRouter } from "next/navigation";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 import { toast } from "react-hot-toast";
 
-const url = "http://localhost:3000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const LOGIN_ENDPOINT = process.env.NEXT_PUBLIC_LOGIN_ENDPOINT;
+
+const LOGIN_URL = `${API_URL}${LOGIN_ENDPOINT}`;
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -22,7 +26,7 @@ export default function Login() {
     headers.append("Content-Type", "application/json");
     const body = JSON.stringify({ email, password });
 
-    const res = await fetch(url + "/auth/login", {
+    const res = await fetch(LOGIN_URL, {
       method: "POST",
       headers,
       body,

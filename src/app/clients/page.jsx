@@ -10,8 +10,14 @@ export default function ClientList() {
   const [clients, setClients] = useState([]);
   const checking = useProtectedRoute();
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  const CLIENTS_ENDPOINT = process.env.NEXT_PUBLIC_CLIENTS_ENDPOINT;
+
+  const URL = `${API_URL}${CLIENTS_ENDPOINT}`;
+
   async function handleDeleteClient(id) {
-    const res = await fetch(`http://localhost:3000/api/clients/${id}`, {
+    const res = await fetch(`${URL}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +37,7 @@ export default function ClientList() {
       try {
         const token = Cookies.get("token");
 
-        const response = await fetch("http://localhost:3000/api/clients", {
+        const response = await fetch(URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

@@ -1,19 +1,19 @@
 import Link from "next/link";
 
 export default function ClientCard({ client, onDelete }) {
-  const { id, prenom, nom, email, age, sexe, objectif, created_at, photo } =
-    client;
-
-  // Translate gender
-  const sexeLabel = sexe === "H" ? "Man" : sexe === "F" ? "Woman" : "Other";
-
-  // Translate goal
-  const objectifMap = {
-    "perte de poids": "Weight loss",
-    "prise de masse": "Muscle gain",
-    tonification: "Toning",
-  };
-  const translatedGoal = objectifMap[objectif] || objectif;
+  const {
+    id,
+    first_name,
+    last_name,
+    email,
+    age,
+    gender,
+    goal,
+    created_at,
+    photo,
+  } = client;
+  const genderLabel =
+    gender === "M" ? "Men" : gender === "W" ? "Women" : "Other";
 
   return (
     <Link href={`/clients/${client.id}/mensuration`} className="block group">
@@ -23,16 +23,16 @@ export default function ClientCard({ client, onDelete }) {
             {photo ? (
               <img
                 src={photo}
-                alt={`Profile picture of ${prenom} ${nom}`}
+                alt={`${first_name} ${last_name}`}
                 className="w-full h-auto object-cover rounded-md"
               />
             ) : (
-              `${prenom[0]}${nom[0]}`
+              `${first_name[0]}${last_name[0]}`
             )}
           </div>
           <div>
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {prenom} {nom}
+              {first_name} {last_name}
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">{email}</p>
           </div>
@@ -40,16 +40,16 @@ export default function ClientCard({ client, onDelete }) {
 
         <div className="mt-4 space-y-2 text-sm text-gray-800 dark:text-gray-300">
           <p>
-            <span className="font-medium">Age:</span> {age} years
+            <span className="font-medium">Age :</span> {age}
           </p>
           <p>
-            <span className="font-medium">Gender:</span> {sexeLabel}
+            <span className="font-medium">Gender :</span> {genderLabel}
           </p>
           <p>
-            <span className="font-medium">Goal:</span> {translatedGoal}
+            <span className="font-medium">Goal :</span> {goal}
           </p>
           <p>
-            <span className="font-medium">Registered on:</span>{" "}
+            <span className="font-medium">Created :</span>{" "}
             {new Date(created_at).toLocaleDateString()}
           </p>
 

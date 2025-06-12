@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 import { motion } from "framer-motion";
 
-// Animation container for the list
 const container = {
   hidden: {},
   visible: {
@@ -15,22 +14,26 @@ const container = {
   },
 };
 
-// Animation for each item
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
 
-export default function FindCoach() {
-  const [search, setSearch] = useState(""); // Text search
-  const [coaches, setCoaches] = useState([]); // Fetched coaches
-  const [filtered, setFiltered] = useState([]); // Filtered coaches
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  // Fetch coaches when page loads
+const COACHES_ENDPOINT = process.env.NEXT_PUBLIC_COACHES_ENDPOINT;
+
+const URL = `${API_URL}${COACHES_ENDPOINT}`;
+
+export default function TrouverCoach() {
+  const [search, setSearch] = useState("");
+  const [coaches, setCoaches] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+
   useEffect(() => {
     const fetchCoaches = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/coaches/all");
+        const res = await fetch(`${URL}/all`);
         const data = await res.json();
         setCoaches(data.data);
         setFiltered(data.data);
@@ -42,14 +45,13 @@ export default function FindCoach() {
     fetchCoaches();
   }, []);
 
-  // Filter results when typing (excluding description)
   useEffect(() => {
     const results = coaches.filter((coach) => {
-      const name = coach.nom?.toLowerCase() || "";
+      const name = coach.name?.toLowerCase() || "";
       const email = coach.email?.toLowerCase() || "";
-      const query = search.toLowerCase();
+      const searchText = search.toLowerCase();
 
-      return name.includes(query) || email.includes(query);
+      return name.includes(searchText) || email.includes(searchText);
     });
 
     setFiltered(results);
@@ -59,14 +61,12 @@ export default function FindCoach() {
     <MotionLayoutWrapper>
       <div className="w-full max-w-6xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-background text-secondary">
         <div className="mb-10">
-          <h2 className="text-7xl font-bold mb-4">Our Coaches</h2>
+          <h2 className="text-7xl font-bold mb-4">Our coaches</h2>
           <p className="text-subtitle max-w-2xl sm:text-xl text-lg">
-            Discover the available coaches and get in touch with the one that
-            suits you best.
+            Discover available coaches and contact the one who suits you best.
           </p>
         </div>
 
-        {/* 🔍 Search bar */}
         <div className="mb-4 sm:mb-6">
           <label
             htmlFor="search"
@@ -84,7 +84,6 @@ export default function FindCoach() {
           />
         </div>
 
-        {/* Animated list of coaches */}
         <motion.ul
           className="grid grid-cols-[repeat(auto-fit,_minmax(320px,_1fr))] gap-6 sm:gap-8 justify-center"
           variants={container}
@@ -97,7 +96,7 @@ export default function FindCoach() {
               variants={fadeUp}
               className="w-full flex justify-center"
             >
-              <CoachCard nom={coach.nom} email={coach.email} />
+              <CoachCard name={coach.name} email={coach.email} />
             </motion.li>
           ))}
         </motion.ul>
