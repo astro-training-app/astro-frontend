@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import FormulaireMensurations from "@/app/mensurations/FormulaireMensurations";
+import FormulaireMensurations from "@/app/measurements/MeasurementsForm";
 import HistoriqueMensurations from "@/components/mensurations/HistoriqueMensurations";
 import GraphiqueMensurations from "@/components/mensurations/GraphiqueMensurations";
 import DerniereMensuration from "@/components/DerniereMensuration";

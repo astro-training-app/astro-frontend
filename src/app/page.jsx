@@ -28,13 +28,10 @@ export default function Home() {
 
           {/* Boutons */}
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
-            <Button color="blue" onClick={() => router.push("/devenir-coach")}>
+            <Button color="blue" onClick={() => router.push("/register")}>
               Become a Coach
             </Button>
-            <Button
-              color="emptyBlue"
-              onClick={() => router.push("/trouver-coach")}
-            >
+            <Button color="emptyBlue" onClick={() => router.push("/partners")}>
               Find a Coach
             </Button>
             <Button color="emptyBlue" onClick={() => router.push("/login")}>
