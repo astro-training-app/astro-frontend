@@ -3,8 +3,8 @@
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import FormulaireMensurations from "@/app/measurements/MeasurementsForm";
-import HistoriqueMensurations from "@/components/mensurations/HistoriqueMensurations";
-import GraphiqueMensurations from "@/components/mensurations/GraphiqueMensurations";
+import HistoriqueMensurations from "@/components/measurements/MeasurementsHistory";
+import GraphiqueMensurations from "@/components/measurements/MeasurementsGraph";
 import DerniereMensuration from "@/components/DerniereMensuration";
 
 export default function MockClientPage() {

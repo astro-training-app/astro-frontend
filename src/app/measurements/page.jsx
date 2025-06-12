@@ -1,6 +1,6 @@
 "use client";
 import FormulaireMensurations from "@/app/measurements/MeasurementsForm";
-import ListeMensurations from "@/components/mensurations/ListeMensurations";
+import ListeMensurations from "@/components/measurements/ListeMensurations";
 
 export default function PageMensurations() {
   return (

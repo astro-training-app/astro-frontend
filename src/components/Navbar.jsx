@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import LogoutButton from "./logoutButton";
+import LogoutButton from "@/components/buttons/logoutButton";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect, useRef } from "react";
-import NavBarLink from "./links/NavBarLink";
+import NavBarLink from "@/components/links/NavBarLink";
 import {
   House,
   UserPlus,
