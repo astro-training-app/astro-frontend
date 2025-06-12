@@ -154,72 +154,8 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         type="submit"
         className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-white w-full"
       >
-        <h2 className="text-2xl font-bold">Add a Measurement</h2>
-
-        <input
-          type="date"
-          name="date_mesure"
-          value={formData.date_mesure}
-          onChange={handleChange}
-          className="input-style"
-        />
-
-        <input
-          type="number"
-          name="poids"
-          placeholder="Weight (kg)"
-          value={formData.poids}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="taille"
-          placeholder="Height (cm)"
-          value={formData.taille}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="tour_biceps"
-          placeholder="Biceps (cm)"
-          value={formData.tour_biceps}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="tour_poitrine"
-          placeholder="Chest (cm)"
-          value={formData.tour_poitrine}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="tour_taille"
-          placeholder="Waist (cm)"
-          value={formData.tour_taille}
-          onChange={handleChange}
-          className="input-style"
-        />
-        <input
-          type="number"
-          name="tour_cuisse"
-          placeholder="Thigh (cm)"
-          value={formData.tour_cuisse}
-          onChange={handleChange}
-          className="input-style"
-        />
-
-        <button
-          type="submit"
-          className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 text-white"
-        >
-          Save Measurement
-        </button>
-      </form>
-    </>
+        Save Measurement
+      </button>
+    </form>
   );
 }
