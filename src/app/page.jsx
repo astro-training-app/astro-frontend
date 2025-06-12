@@ -15,7 +15,6 @@ export default function Home() {
       <div className="flex flex-col-reverse lg:flex-row items-center lg:h-[60vh]">
         <div className="flex flex-col items-center lg:items-start justify-center px-4 py-8 bg-background text-center lg:text-left">
           {/* Titre principal */}
-
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 text-center lg:text-left">
             Transform Your Fitness Journey
           </h1>
@@ -26,24 +25,41 @@ export default function Home() {
             all-in-one platform.
           </p>
 
-          {/* Boutons */}
+          {/* Boutons conditionnels */}
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
-            <Button color="blue" onClick={() => router.push("/devenir-coach")}>
-              Become a Coach
-            </Button>
+            {/* Si connecté → bouton Client List */}
+            {isAuthenticated ? (
+              <Button color="blue" onClick={() => router.push("/clients")}>
+                Client List
+              </Button>
+            ) : (
+              // Sinon → bouton Devenir Coach
+              <Button
+                color="blue"
+                onClick={() => router.push("/devenir-coach")}
+              >
+                Become a Coach
+              </Button>
+            )}
+
+            {/* Bouton toujours visible */}
             <Button
               color="emptyBlue"
               onClick={() => router.push("/trouver-coach")}
             >
               Find a Coach
             </Button>
-            <Button color="emptyBlue" onClick={() => router.push("/login")}>
-              Login
-            </Button>
-          </div>
 
-          {/* Illustration */}
+            {/* Si NON connecté → bouton Login */}
+            {!isAuthenticated && (
+              <Button color="emptyBlue" onClick={() => router.push("/login")}>
+                Login
+              </Button>
+            )}
+          </div>
         </div>
+
+        {/* Illustration */}
         <Image
           src="/img/coach-homepage.jpg"
           alt="Sport illustration"
