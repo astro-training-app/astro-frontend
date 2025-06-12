@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import LogoutButton from "./logoutButton";
+import LogoutButton from "@/components/buttons/logoutButton";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect, useRef } from "react";
-import NavBarLink from "./links/NavBarLink";
+import NavBarLink from "@/components/links/NavBarLink";
 import {
   House,
   UserPlus,
@@ -81,7 +81,7 @@ export default function Navbar() {
         )}
 
         <NavBarLink
-          href="/trouver-coach"
+          href="/partners"
           icon={<Handshake />}
           callback={closeNavBar}
         >
@@ -99,7 +99,7 @@ export default function Navbar() {
         )}
         {!isAuthenticated && (
           <NavBarLink
-            href="/devenir-coach"
+            href="/register"
             icon={<UserPlus />}
             callback={closeNavBar}
           >
