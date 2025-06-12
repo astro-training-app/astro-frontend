@@ -17,9 +17,9 @@ export default function ClientCard({ client, onDelete }) {
 
   return (
     <Link href={`/clients/${client.id}/measurements`} className="block group">
-      <div className="bg-white dark:bg-background dark:border rounded-2xl shadow p-6 w-full max-w-[420px] mx-auto group-hover:shadow-lg transition">
+      <div className="border border-subtitle rounded-2xl shadow p-6 w-full max-w-[420px] mx-auto group-hover:shadow-lg transition">
         <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 rounded-full bg-gray-300 dark:bg-zinc-600 flex items-center justify-center text-xl font-bold text-white">
+          <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-xl font-bold">
             {photo ? (
               <img
                 src={photo}

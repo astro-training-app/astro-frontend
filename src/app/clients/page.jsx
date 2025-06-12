@@ -58,13 +58,10 @@ export default function ClientList() {
     fetchClients();
   }, []);
 
-  if (checking)
-    return (
-      <p className="bg-gray-200 text-gray-800 p-10 rounded-lg">Loading...</p>
-    );
+  if (checking) return <p className="p-10 rounded-lg">Loading...</p>;
 
   return (
-    <main className="bg-white dark:bg-black text-black dark:text-white p-10">
+    <main className="text-black dark:text-white p-10">
       <MotionLayoutWrapper>
         <h1 className="text-3xl font-bold mb-6 text-center">Client List</h1>
 
