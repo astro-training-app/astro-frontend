@@ -9,8 +9,8 @@ export default function LogoutButton() {
   const router = useRouter();
 
   const handleLogout = () => {
-    logout(); // supprime le token
-    router.push("/"); // redirige vers l’accueil immédiatement
+    logout();
+    router.push("/");
   };
 
   return (
