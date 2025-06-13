@@ -5,15 +5,14 @@ import React, { useEffect, useState } from "react";
 import useProtectedRoute from "@/hooks/useProtectedRoute";
 import ClientCard from "@/components/clients/ClientCard";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
+import Link from "next/link";
 
 export default function ClientList() {
   const [clients, setClients] = useState([]);
   const checking = useProtectedRoute();
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
   const CLIENTS_ENDPOINT = process.env.NEXT_PUBLIC_CLIENTS_ENDPOINT;
-
   const URL = `${API_URL}${CLIENTS_ENDPOINT}`;
 
   async function handleDeleteClient(id) {
@@ -36,7 +35,6 @@ export default function ClientList() {
     const fetchClients = async () => {
       try {
         const token = Cookies.get("token");
-
         const response = await fetch(URL, {
           method: "GET",
           headers: {
@@ -46,7 +44,6 @@ export default function ClientList() {
         });
 
         const result = await response.json();
-
         if (result?.data) {
           setClients(result.data);
         }
@@ -76,6 +73,16 @@ export default function ClientList() {
               onDelete={handleDeleteClient}
             />
           ))}
+
+          {/* ➕ Carte Ajouter un client */}
+          <div className="w-full max-w-sm h-full border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-xl flex items-center justify-center p-6 hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+            <Link
+              href="/ajouter-client"
+              className="text-blue-600 dark:text-blue-400 text-lg font-semibold hover:underline"
+            >
+              ➕ Ajouter un client
+            </Link>
+          </div>
         </div>
       </MotionLayoutWrapper>
     </main>
