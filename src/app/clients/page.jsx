@@ -6,6 +6,7 @@ import useProtectedRoute from "@/hooks/useProtectedRoute";
 import ClientCard from "@/components/clients/ClientCard";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 import Link from "next/link";
+import { Plus } from "lucide-react";
 
 export default function ClientList() {
   const [clients, setClients] = useState([]);
@@ -71,13 +72,13 @@ export default function ClientList() {
             />
           ))}
 
-          {/* ➕ Carte Ajouter un client */}
-          <div className="w-full max-w-sm h-full border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-xl flex items-center justify-center p-6 hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+          {/* Carte Ajouter un client */}
+          <div className="w-auto border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-2xl shadow p-6 mx-auto hover:bg-gray-100 dark:hover:bg-gray-800 transition">
             <Link
-              href="/ajouter-client"
-              className="text-blue-600 dark:text-blue-400 text-lg font-semibold hover:underline"
+              href="/add-client"
+              className="flex items-center justify-center gap-2 text-blue-600 dark:text-blue-400 text-lg font-semibold hover:underline"
             >
-              ➕ Ajouter un client
+              <Plus /> Add client
             </Link>
           </div>
         </div>
