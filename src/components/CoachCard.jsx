@@ -3,8 +3,8 @@
 import { User2, ExternalLink } from "lucide-react";
 
 export default function CoachCard({
-  nom = "Nom inconnu",
-  email = "Email inconnu",
+  name = "Unknow name",
+  email = "Unknow Email",
 }) {
   return (
     <div className="w-full sm:max-w-md bg-background border border-subtitle text-secondary p-8 rounded-2xl shadow-md flex flex-col sm:flex-row items-center sm:items-start gap-6 hover:shadow-xl transition text-center sm:text-left">
@@ -15,7 +15,7 @@ export default function CoachCard({
 
       {/* Contenu coach */}
       <div className="flex-1 space-y-4">
-        <h3 className="text-xl sm:text-2xl font-bold">{nom}</h3>
+        <h3 className="text-xl sm:text-2xl font-bold">{name}</h3>
         <p className="text-base sm:text-lg italic mt-2">{email}</p>
         <a
           href="https://http.cat/404"
