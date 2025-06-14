@@ -1,47 +1,46 @@
 "use client";
-import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import { useAuth } from "@/contexts/AuthContext";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import MotionLayoutWrapper from "@/components/MotionLayoutWrapper";
 import { toast } from "react-hot-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 const LOGIN_ENDPOINT = process.env.NEXT_PUBLIC_LOGIN_ENDPOINT;
-
 const LOGIN_URL = `${API_URL}${LOGIN_ENDPOINT}`;
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const { setIsAuthenticated } = useAuth();
   const router = useRouter();
+  const { refreshAuth } = useAuth();
 
   const verification = async (e) => {
     e.preventDefault();
 
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    const body = JSON.stringify({ email, password });
+    try {
+      const res = await fetch(LOGIN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
 
-    const res = await fetch(LOGIN_URL, {
-      method: "POST",
-      headers,
-      body,
-    });
+      const data = await res.json();
 
-    const data = await res.json();
-    const cookieTimer = new Date(data.expireAt);
-    setMessage(data.message);
+      if (!res.ok) {
+        toast.error(data.message || "Login failed");
+        return;
+      }
 
-    if (res.ok) {
-      Cookies.set("token", data.token, { expires: cookieTimer });
-      setIsAuthenticated(true);
+      toast.success("Logged in successfully");
+      await refreshAuth();
+      router.refresh();
       router.push("/");
-    } else {
-      toast.error(data.message);
+    } catch (err) {
+      toast.error("An error occurred during login.");
     }
   };
 

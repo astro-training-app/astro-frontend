@@ -23,10 +23,7 @@ export default function Profile() {
         try {
           const response = await fetch("http://localhost:3000/api/coaches", {
             method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${Cookies.get("token")}`,
-            },
+            credentials: "include", // Include cookies for authentication
           });
           if (!response.ok) {
             throw new Error("Error while fetching coaches");

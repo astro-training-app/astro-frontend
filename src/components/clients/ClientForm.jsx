@@ -34,13 +34,10 @@ export default function ClientForm() {
     e.preventDefault();
 
     try {
-      const token = Cookies.get("token");
-
       const response = await fetch(URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           lastName: formData.lastName,
@@ -51,6 +48,7 @@ export default function ClientForm() {
           goal: formData.goal,
           photo: "",
         }),
+        credentials: "include",
       });
 
       const result = await response.json();

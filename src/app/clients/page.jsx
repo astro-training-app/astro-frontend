@@ -21,8 +21,8 @@ export default function ClientList() {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${Cookies.get("token")}`,
       },
+      credentials: "include",
     });
 
     if (res.ok) {
@@ -35,13 +35,12 @@ export default function ClientList() {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const token = Cookies.get("token");
         const response = await fetch(URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
+          credentials: "include",
         });
 
         const result = await response.json();
@@ -49,7 +48,7 @@ export default function ClientList() {
           setClients(result.data);
         }
       } catch (error) {
-        console.error("❌ Erreur lors du fetch des clients :", error);
+        console.error("Error while fetching clients:", error);
       }
     };
 
