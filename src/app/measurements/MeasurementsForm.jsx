@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 
 export default function FormulaireMensurations({ clientId, onNewMensuration }) {
@@ -17,13 +16,19 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
 
   const [mensurations, setMensurations] = useState([]);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const MEASUREMENTS_ENDPOINT = process.env.NEXT_PUBLIC_MEASUREMENTS_ENDPOINT;
+  const URL = `${API_URL}${MEASUREMENTS_ENDPOINT}`;
+
   useEffect(() => {
     const fetchMensurations = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:3000/api/measurements/client/${clientId}`
-        );
+        const res = await fetch(`${URL}/client/${clientId}`, {
+          method: "GET",
+          credentials: "include",
+        });
         const data = await res.json();
+        console.log("Fetched measurements:", data);
         setMensurations(data.data || []);
       } catch (error) {
         console.error("Error loading measurements:", error);
@@ -46,13 +51,11 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
     e.preventDefault();
 
     try {
-      const token = Cookies.get("token");
-
-      const response = await fetch("http://localhost:3000/api/measurements", {
+      const response = await fetch(`${URL}`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...formData,
@@ -80,7 +83,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
         thigh: "",
       });
       if (onNewMensuration) onNewMensuration();
-      setMensurations((prev) => [...prev, result]);
+      setMensurations((prev) => [...prev, result.data]);
     } catch (err) {
       console.error("❌ Error:", err);
       toast.error("An error occurred.");

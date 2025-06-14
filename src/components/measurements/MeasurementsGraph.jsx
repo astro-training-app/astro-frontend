@@ -46,14 +46,19 @@ export default function GraphiqueMensurations({ clientId, refresh }) {
     thigh: "Thigh (cm)",
   };
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const MEASUREMENTS_ENDPOINT = process.env.NEXT_PUBLIC_MEASUREMENTS_ENDPOINT;
+  const MEASUREMENTS_URL = `${API_URL}${MEASUREMENTS_ENDPOINT}`;
+
   useEffect(() => {
     const fetchMeasurements = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:3000/api/measurements/client/${clientId}`
-        );
-        const raw = await res.json();
+        const res = await fetch(`${MEASUREMENTS_URL}/client/${clientId}`, {
+          method: "GET",
+          credentials: "include", // ✅ Inclut les cookies httpOnly
+        });
 
+        const raw = await res.json();
         const sorted = (raw.data || []).sort(
           (a, b) => new Date(a.date) - new Date(b.date)
         );

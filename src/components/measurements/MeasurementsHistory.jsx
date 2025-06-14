@@ -17,7 +17,11 @@ export default function HistoriqueMensurations({
   useEffect(() => {
     const fetchMensurations = async () => {
       try {
-        const res = await fetch(`${URL}/client/${clientId}`);
+        const res = await fetch(`${URL}/client/${clientId}`, {
+          method: "GET",
+          credentials: "include", // 🔒 inclut le cookie JWT
+        });
+
         const result = await res.json();
 
         const raw = result.data || [];
@@ -63,7 +67,9 @@ export default function HistoriqueMensurations({
     try {
       const res = await fetch(`${URL}/${id}`, {
         method: "DELETE",
+        credentials: "include", // 🔒 inclut le cookie JWT
       });
+
       if (!res.ok) throw new Error("Delete error");
 
       if (typeof refreshNow === "function") refreshNow();

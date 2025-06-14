@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-const url = "http://localhost:3000/api/measurements";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const MEASUREMENTS_ENDPOINT = process.env.NEXT_PUBLIC_MEASUREMENTS_ENDPOINT;
+const url = `${API_URL}${MEASUREMENTS_ENDPOINT}`;
 
 export default function ListeMensurations() {
   const [measurements, setMeasurements] = useState([]);
@@ -10,7 +12,10 @@ export default function ListeMensurations() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, {
+          method: "GET",
+          credentials: "include",
+        });
         if (!res.ok) {
           throw new Error("Failed to fetch measurements");
         }
@@ -28,6 +33,7 @@ export default function ListeMensurations() {
     try {
       const res = await fetch(`${url}/${id}`, {
         method: "DELETE",
+        credentials: "include",
       });
 
       if (!res.ok) {
@@ -47,13 +53,13 @@ export default function ListeMensurations() {
           key={item.id}
           className="dark:bg-background rounded-lg p-4 shadow-md border bg-white"
         >
-          <p className="text-lg font-semibold mb-2">📅 {item.date}</p>
-          <p>⚖️ Weight: {item.weight} kg</p>
-          <p>📏 Height: {item.height} cm</p>
-          <p>💪 Biceps: {item.biceps} cm</p>
-          <p>🧍 Chest: {item.chest} cm</p>
-          <p>🧍‍♂️ Waist: {item.waist} cm</p>
-          <p>🦵 Thigh: {item.thigh} cm</p>
+          <p className="text-lg font-semibold mb-2">{item.date}</p>
+          <p>Weight: {item.weight} kg</p>
+          <p>Height: {item.height} cm</p>
+          <p>Biceps: {item.biceps} cm</p>
+          <p>Chest: {item.chest} cm</p>
+          <p>Waist: {item.waist} cm</p>
+          <p>Thigh: {item.thigh} cm</p>
 
           <button
             onClick={() => handleDelete(item.id)}
