@@ -142,7 +142,7 @@ export default function Profile() {
         {/* Action Buttons */}
         <div className="mt-6 flex flex-col sm:flex-row gap-4">
           <button
-            onClick={() => router.push("/ajouter-client")}
+            onClick={() => router.push("/add-client")}
             className="bg-primary hover:bg-button-hover-bg transition text-white px-4 py-2 rounded"
           >
             Add client
