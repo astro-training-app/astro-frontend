@@ -29,18 +29,12 @@ export default function Home() {
                 Client List
               </Button>
             ) : (
-              <Button
-                color="blue"
-                onClick={() => router.push("/devenir-coach")}
-              >
+              <Button color="blue" onClick={() => router.push("/register")}>
                 Become a Coach
               </Button>
             )}
 
-            <Button
-              color="emptyBlue"
-              onClick={() => router.push("/trouver-coach")}
-            >
+            <Button color="emptyBlue" onClick={() => router.push("/partners")}>
               Find a Coach
             </Button>
 

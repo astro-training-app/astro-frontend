@@ -85,7 +85,7 @@ export default function FormulaireMensurations({ clientId, onNewMensuration }) {
       if (onNewMensuration) onNewMensuration();
       setMensurations((prev) => [...prev, result.data]);
     } catch (err) {
-      console.error("❌ Error:", err);
+      console.error("Error:", err);
       toast.error("An error occurred.");
     }
   }
